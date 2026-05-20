@@ -1,0 +1,106 @@
+# HU → 4~9-way 전이 계수 (초안, Draft).
+# 근거: research/dataset_analysis/inspection_report.md §5, eda_02_clusters.md §5.2, §5.3.
+# J.2 Transfer Matrix 에 따라 각 지표의 전이 가능성 등급을 분리.
+
+version: 0.1
+stage: draft
+source: "inspection_report.md v0.1 + eda_02_clusters.md v0.1 (문헌값 혼합)"
+
+# 전이 가능성 등급
+# HIGH   : HU 값을 그대로 또는 미세 보정으로 사용 가능 (수학적 동일성)
+# MID    : 포지션·인원 보정 후 사용
+# LOW    : HU 값을 참조만, 실제 적용은 self-play/서버 로그
+# NONE   : 전이 불가. 서버 데이터 필수
+
+applicability_level:
+  # 프리플롭 볼륨 지표 (HU 는 본질적으로 더 넓음)
+  VPIP:              LOW
+  PFR:               LOW
+  THREE_BET:         MID
+  FOLD_TO_THREE_BET: MID
+  # 포스트플롭 (2-way 는 멀티웨이와 연속적 구조)
+  CBET:              HIGH
+  FOLD_TO_CBET:      HIGH
+  BARREL_TURN:       HIGH
+  BARREL_RIVER:      HIGH
+  CHECK_RAISE:       MID
+  # 쇼다운 신호 (데이터셋 한계)
+  BLUFF_AT_SHOWDOWN: MID
+  # 토너먼트 고유 (HU cash → tournament 전이)
+  ICM_PRESSURE:      NONE
+  SHORT_STACK_JAM:   NONE   # 별도 Nash 차트로 치환
+
+# 수치 보정 계수 (초안, 문헌값 + HU 관측 15 LLM 평균 기준)
+# hu_to_Nway * hu_rate = estimated Nway rate
+# HU VPIP 평균 0.78 → 9max 평균 목표 VPIP ~0.25 → 0.78 × 0.32 ≈ 0.25
+coefficients:
+  VPIP:
+    hu_to_9max: 0.32
+    hu_to_6max: 0.45
+    hu_to_4max: 0.60
+  PFR:
+    hu_to_9max: 0.30
+    hu_to_6max: 0.42
+    hu_to_4max: 0.55
+  THREE_BET:
+    hu_to_9max: 0.60
+    hu_to_6max: 0.75
+    hu_to_4max: 0.85
+  FOLD_TO_THREE_BET:
+    hu_to_9max: 1.00     # 거의 동일
+    hu_to_6max: 1.00
+    hu_to_4max: 1.00
+  CBET:
+    hu_to_9max: 0.92
+    hu_to_6max: 0.95
+    hu_to_4max: 0.98
+  FOLD_TO_CBET:
+    hu_to_9max: 0.95
+    hu_to_6max: 0.98
+    hu_to_4max: 1.00
+  BARREL_TURN:
+    hu_to_9max: 0.90
+    hu_to_6max: 0.95
+    hu_to_4max: 0.98
+  BARREL_RIVER:
+    hu_to_9max: 0.85
+    hu_to_6max: 0.92
+    hu_to_4max: 0.97
+  BLUFF_AT_SHOWDOWN:
+    hu_to_9max: 0.75
+    hu_to_6max: 0.85
+    hu_to_4max: 0.92
+
+# Position 별 VPIP 분산 (HU 값에서 position-resolved VPIP 로 전환 시 사용)
+# 전이: hu_SB_VPIP 는 full-ring BTN/CO (open steal 포지션) 의 상한으로만 사용
+position_vpip_distribution_9max_target:
+  EP:  0.12
+  MP:  0.18
+  CO:  0.26
+  BTN: 0.38
+  SB:  0.30
+  BB:  0.22   # defend 는 VPIP 에 카운트되는 경우/아닌 경우 정의에 의존
+
+# 적용 규칙
+application_rules:
+  # HIGH 등급은 HU 값을 그대로 사용하되 transfer coefficient 1.0 가정
+  # MID 등급은 hu_value × coef_to_Nmax
+  # LOW 등급은 서버 부트스트랩 후 blend: final = 0.3 × hu_based + 0.7 × server
+  # NONE 등급은 HU 값 사용 금지
+  blend_with_bootstrap:
+    HIGH:  {hu_weight: 0.7, server_weight: 0.3}
+    MID:   {hu_weight: 0.4, server_weight: 0.6}
+    LOW:   {hu_weight: 0.1, server_weight: 0.9}
+    NONE:  {hu_weight: 0.0, server_weight: 1.0}
+
+# Sanity bounds (최종 prior 가 이 범위를 벗어나면 경고)
+sanity_bounds:
+  VPIP_9max: [0.12, 0.40]
+  PFR_9max:  [0.08, 0.30]
+  CBET:      [0.45, 0.85]
+  FOLD_TO_CBET: [0.30, 0.70]
+
+# 검증 절차
+validation:
+  - "R4 self-play (주 5-6) 에서 9max/6max 부트스트랩 후 각 계수가 관측값과 ±20% 이내 일치하는지 확인"
+  - "벗어날 경우 계수 수정 → 문서 v0.2 로 갱신"

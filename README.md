@@ -38,7 +38,7 @@ B-lab-holdem-bots/
 | 닉네임 | 폴더 | 메인 전략 |
 |--------|------|----------|
 | eunwoo | [`eunwoo/`](./eunwoo/) | TBD (Phase 2에서 채움) |
-| TBD | — | — |
+| homin | [`homin/`](./homin/) | Bayesian 상대모델 + Kelly 유사 log-utility + Kaggle LLM 1:1 데이터로 cold-start 해결 |
 | TBD | — | — |
 | TBD | — | — |
 | TBD | — | — |

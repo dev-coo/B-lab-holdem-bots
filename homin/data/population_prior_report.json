@@ -1,0 +1,709 @@
+{
+  "scanned_hands": 2059400,
+  "population": {
+    "THREE_BET": {
+      "tries": 1781721,
+      "hits": 417117,
+      "rate": 0.23410904400857374,
+      "alpha": 417118,
+      "beta": 1364605
+    },
+    "CBET": {
+      "tries": 1126024,
+      "hits": 869193,
+      "rate": 0.7719133872812658,
+      "alpha": 869194,
+      "beta": 256832
+    },
+    "FOLD_TO_THREE_BET": {
+      "tries": 417117,
+      "hits": 207391,
+      "rate": 0.4972010251320373,
+      "alpha": 207392,
+      "beta": 209727
+    },
+    "FOLD_TO_CBET": {
+      "tries": 869193,
+      "hits": 298204,
+      "rate": 0.3430814560172482,
+      "alpha": 298205,
+      "beta": 570990
+    },
+    "BARREL_TURN": {
+      "tries": 437664,
+      "hits": 261613,
+      "rate": 0.5977485011332895,
+      "alpha": 261614,
+      "beta": 176052
+    },
+    "BARREL_RIVER": {
+      "tries": 138828,
+      "hits": 66043,
+      "rate": 0.4757181548390815,
+      "alpha": 66044,
+      "beta": 72786
+    }
+  },
+  "per_player": {
+    "Claude Opus 4.5": {
+      "THREE_BET": {
+        "tries": 119336,
+        "hits": 14573,
+        "rate": 0.12211738285177985,
+        "alpha": 14574,
+        "beta": 104764
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 33664,
+        "hits": 19627,
+        "rate": 0.5830263783269962,
+        "alpha": 19628,
+        "beta": 14038
+      },
+      "CBET": {
+        "tries": 69939,
+        "hits": 57847,
+        "rate": 0.8271064785026953,
+        "alpha": 57848,
+        "beta": 12093
+      },
+      "BARREL_TURN": {
+        "tries": 28278,
+        "hits": 18044,
+        "rate": 0.6380932173421034,
+        "alpha": 18045,
+        "beta": 10235
+      },
+      "FOLD_TO_CBET": {
+        "tries": 74837,
+        "hits": 26109,
+        "rate": 0.3488782286836725,
+        "alpha": 26110,
+        "beta": 48729
+      },
+      "BARREL_RIVER": {
+        "tries": 9466,
+        "hits": 4517,
+        "rate": 0.47718149165434187,
+        "alpha": 4518,
+        "beta": 4950
+      }
+    },
+    "Claude Opus 4.6": {
+      "CBET": {
+        "tries": 71657,
+        "hits": 59734,
+        "rate": 0.8336101148527011,
+        "alpha": 59735,
+        "beta": 11924
+      },
+      "THREE_BET": {
+        "tries": 117006,
+        "hits": 17004,
+        "rate": 0.14532588072406544,
+        "alpha": 17005,
+        "beta": 100003
+      },
+      "FOLD_TO_CBET": {
+        "tries": 73723,
+        "hits": 23059,
+        "rate": 0.31277891567082183,
+        "alpha": 23060,
+        "beta": 50665
+      },
+      "BARREL_TURN": {
+        "tries": 30213,
+        "hits": 20068,
+        "rate": 0.6642173898652898,
+        "alpha": 20069,
+        "beta": 10146
+      },
+      "BARREL_RIVER": {
+        "tries": 9904,
+        "hits": 5050,
+        "rate": 0.5098949919224556,
+        "alpha": 5051,
+        "beta": 4855
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 32576,
+        "hits": 17639,
+        "rate": 0.5414722495088409,
+        "alpha": 17640,
+        "beta": 14938
+      }
+    },
+    "Claude Sonnet 4.5": {
+      "CBET": {
+        "tries": 78716,
+        "hits": 68225,
+        "rate": 0.8667234107424158,
+        "alpha": 68226,
+        "beta": 10492
+      },
+      "BARREL_TURN": {
+        "tries": 30361,
+        "hits": 22580,
+        "rate": 0.7437172688646619,
+        "alpha": 22581,
+        "beta": 7782
+      },
+      "THREE_BET": {
+        "tries": 117262,
+        "hits": 19117,
+        "rate": 0.16302809094165202,
+        "alpha": 19118,
+        "beta": 98146
+      },
+      "FOLD_TO_CBET": {
+        "tries": 70406,
+        "hits": 17917,
+        "rate": 0.2544811521745306,
+        "alpha": 17918,
+        "beta": 52490
+      },
+      "BARREL_RIVER": {
+        "tries": 12776,
+        "hits": 6269,
+        "rate": 0.4906856606136506,
+        "alpha": 6270,
+        "beta": 6508
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 31043,
+        "hits": 16446,
+        "rate": 0.5297812711400316,
+        "alpha": 16447,
+        "beta": 14598
+      }
+    },
+    "Claude Sonnet 4.6": {
+      "CBET": {
+        "tries": 81756,
+        "hits": 72088,
+        "rate": 0.8817456822740839,
+        "alpha": 72089,
+        "beta": 9669
+      },
+      "THREE_BET": {
+        "tries": 111628,
+        "hits": 32212,
+        "rate": 0.28856559286200595,
+        "alpha": 32213,
+        "beta": 79417
+      },
+      "FOLD_TO_CBET": {
+        "tries": 69629,
+        "hits": 29014,
+        "rate": 0.4166941935113243,
+        "alpha": 29015,
+        "beta": 40616
+      },
+      "BARREL_TURN": {
+        "tries": 31033,
+        "hits": 21042,
+        "rate": 0.67805239583669,
+        "alpha": 21043,
+        "beta": 9992
+      },
+      "BARREL_RIVER": {
+        "tries": 11482,
+        "hits": 4938,
+        "rate": 0.4300644487023167,
+        "alpha": 4939,
+        "beta": 6545
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 32696,
+        "hits": 13746,
+        "rate": 0.4204183998042574,
+        "alpha": 13747,
+        "beta": 18951
+      }
+    },
+    "DeepSeek V3.2": {
+      "THREE_BET": {
+        "tries": 116562,
+        "hits": 34509,
+        "rate": 0.2960570340248108,
+        "alpha": 34510,
+        "beta": 82054
+      },
+      "FOLD_TO_CBET": {
+        "tries": 30042,
+        "hits": 8573,
+        "rate": 0.28536715265295254,
+        "alpha": 8574,
+        "beta": 21470
+      },
+      "CBET": {
+        "tries": 70794,
+        "hits": 55198,
+        "rate": 0.7796988445348476,
+        "alpha": 55199,
+        "beta": 15597
+      },
+      "BARREL_TURN": {
+        "tries": 28878,
+        "hits": 18747,
+        "rate": 0.6491793060461251,
+        "alpha": 18748,
+        "beta": 10132
+      },
+      "BARREL_RIVER": {
+        "tries": 10092,
+        "hits": 4819,
+        "rate": 0.4775069361870789,
+        "alpha": 4820,
+        "beta": 5274
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 28150,
+        "hits": 16656,
+        "rate": 0.5916873889875666,
+        "alpha": 16657,
+        "beta": 11495
+      }
+    },
+    "GPT-5.2": {
+      "CBET": {
+        "tries": 97633,
+        "hits": 73678,
+        "rate": 0.7546423852590824,
+        "alpha": 73679,
+        "beta": 23956
+      },
+      "THREE_BET": {
+        "tries": 119257,
+        "hits": 39313,
+        "rate": 0.3296494126130961,
+        "alpha": 39314,
+        "beta": 79945
+      },
+      "BARREL_TURN": {
+        "tries": 42004,
+        "hits": 22816,
+        "rate": 0.5431863632035044,
+        "alpha": 22817,
+        "beta": 19189
+      },
+      "FOLD_TO_CBET": {
+        "tries": 68990,
+        "hits": 24137,
+        "rate": 0.3498622988838962,
+        "alpha": 24138,
+        "beta": 44854
+      },
+      "BARREL_RIVER": {
+        "tries": 11582,
+        "hits": 4704,
+        "rate": 0.40614747021239855,
+        "alpha": 4705,
+        "beta": 6879
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 28273,
+        "hits": 11911,
+        "rate": 0.4212853252219432,
+        "alpha": 11912,
+        "beta": 16363
+      }
+    },
+    "GPT-5.4": {
+      "THREE_BET": {
+        "tries": 138350,
+        "hits": 28278,
+        "rate": 0.20439465124683773,
+        "alpha": 28279,
+        "beta": 110073
+      },
+      "FOLD_TO_CBET": {
+        "tries": 89018,
+        "hits": 35806,
+        "rate": 0.4022332561953762,
+        "alpha": 35807,
+        "beta": 53213
+      },
+      "CBET": {
+        "tries": 68964,
+        "hits": 49029,
+        "rate": 0.7109361405950931,
+        "alpha": 49030,
+        "beta": 19936
+      },
+      "BARREL_TURN": {
+        "tries": 27416,
+        "hits": 12798,
+        "rate": 0.46680770353078493,
+        "alpha": 12799,
+        "beta": 14619
+      },
+      "BARREL_RIVER": {
+        "tries": 6619,
+        "hits": 2483,
+        "rate": 0.3751321951956489,
+        "alpha": 2484,
+        "beta": 4137
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 22054,
+        "hits": 9426,
+        "rate": 0.4274054593271062,
+        "alpha": 9427,
+        "beta": 12629
+      }
+    },
+    "GPT-5.4 mini": {
+      "CBET": {
+        "tries": 82031,
+        "hits": 67432,
+        "rate": 0.8220306957125965,
+        "alpha": 67433,
+        "beta": 14600
+      },
+      "THREE_BET": {
+        "tries": 124959,
+        "hits": 31885,
+        "rate": 0.2551636936915308,
+        "alpha": 31886,
+        "beta": 93075
+      },
+      "FOLD_TO_CBET": {
+        "tries": 64226,
+        "hits": 18938,
+        "rate": 0.29486500794070936,
+        "alpha": 18939,
+        "beta": 45289
+      },
+      "BARREL_TURN": {
+        "tries": 35982,
+        "hits": 23508,
+        "rate": 0.6533266633316658,
+        "alpha": 23509,
+        "beta": 12475
+      },
+      "BARREL_RIVER": {
+        "tries": 12100,
+        "hits": 5880,
+        "rate": 0.4859504132231405,
+        "alpha": 5881,
+        "beta": 6221
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 28672,
+        "hits": 13964,
+        "rate": 0.48702566964285715,
+        "alpha": 13965,
+        "beta": 14709
+      }
+    },
+    "GPT-5 mini": {
+      "CBET": {
+        "tries": 72949,
+        "hits": 53120,
+        "rate": 0.728179961342856,
+        "alpha": 53121,
+        "beta": 19830
+      },
+      "THREE_BET": {
+        "tries": 118638,
+        "hits": 21273,
+        "rate": 0.1793101704344308,
+        "alpha": 21274,
+        "beta": 97366
+      },
+      "FOLD_TO_CBET": {
+        "tries": 53310,
+        "hits": 15706,
+        "rate": 0.2946163946726693,
+        "alpha": 15707,
+        "beta": 37605
+      },
+      "BARREL_TURN": {
+        "tries": 24354,
+        "hits": 9815,
+        "rate": 0.40301387862363475,
+        "alpha": 9816,
+        "beta": 14540
+      },
+      "BARREL_RIVER": {
+        "tries": 5303,
+        "hits": 2469,
+        "rate": 0.46558551763152933,
+        "alpha": 2470,
+        "beta": 2835
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 41481,
+        "hits": 24051,
+        "rate": 0.57980762276705,
+        "alpha": 24052,
+        "beta": 17431
+      }
+    },
+    "Gemini 3.1 Pro Preview": {
+      "THREE_BET": {
+        "tries": 130548,
+        "hits": 24158,
+        "rate": 0.1850507093176456,
+        "alpha": 24159,
+        "beta": 106391
+      },
+      "CBET": {
+        "tries": 50493,
+        "hits": 24504,
+        "rate": 0.4852949913849445,
+        "alpha": 24505,
+        "beta": 25990
+      },
+      "BARREL_TURN": {
+        "tries": 13016,
+        "hits": 3918,
+        "rate": 0.3010141364474493,
+        "alpha": 3919,
+        "beta": 9099
+      },
+      "FOLD_TO_CBET": {
+        "tries": 36592,
+        "hits": 20899,
+        "rate": 0.5711357673808483,
+        "alpha": 20900,
+        "beta": 15694
+      },
+      "BARREL_RIVER": {
+        "tries": 1575,
+        "hits": 581,
+        "rate": 0.3688888888888889,
+        "alpha": 582,
+        "beta": 995
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 19338,
+        "hits": 10644,
+        "rate": 0.5504188644120385,
+        "alpha": 10645,
+        "beta": 8695
+      }
+    },
+    "Gemini 3 Flash Preview": {
+      "FOLD_TO_THREE_BET": {
+        "tries": 24130,
+        "hits": 11899,
+        "rate": 0.4931205967675093,
+        "alpha": 11900,
+        "beta": 12232
+      },
+      "THREE_BET": {
+        "tries": 121897,
+        "hits": 19355,
+        "rate": 0.15878159429682437,
+        "alpha": 19356,
+        "beta": 102543
+      },
+      "FOLD_TO_CBET": {
+        "tries": 62643,
+        "hits": 26203,
+        "rate": 0.41829095030570057,
+        "alpha": 26204,
+        "beta": 36441
+      },
+      "CBET": {
+        "tries": 56877,
+        "hits": 33690,
+        "rate": 0.5923308191360304,
+        "alpha": 33691,
+        "beta": 23188
+      },
+      "BARREL_TURN": {
+        "tries": 18930,
+        "hits": 6250,
+        "rate": 0.3301637612255679,
+        "alpha": 6251,
+        "beta": 12681
+      },
+      "BARREL_RIVER": {
+        "tries": 2548,
+        "hits": 919,
+        "rate": 0.3606750392464678,
+        "alpha": 920,
+        "beta": 1630
+      }
+    },
+    "Gemini 3 Pro Preview": {
+      "THREE_BET": {
+        "tries": 112245,
+        "hits": 6581,
+        "rate": 0.05863067397211457,
+        "alpha": 6582,
+        "beta": 105665
+      },
+      "FOLD_TO_CBET": {
+        "tries": 58891,
+        "hits": 25374,
+        "rate": 0.430863799222292,
+        "alpha": 25375,
+        "beta": 33518
+      },
+      "CBET": {
+        "tries": 40555,
+        "hits": 10327,
+        "rate": 0.25464184440882753,
+        "alpha": 10328,
+        "beta": 30229
+      },
+      "BARREL_TURN": {
+        "tries": 5344,
+        "hits": 841,
+        "rate": 0.15737275449101795,
+        "alpha": 842,
+        "beta": 4504
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 15658,
+        "hits": 6971,
+        "rate": 0.4452037297228254,
+        "alpha": 6972,
+        "beta": 8688
+      },
+      "BARREL_RIVER": {
+        "tries": 315,
+        "hits": 131,
+        "rate": 0.4158730158730159,
+        "alpha": 132,
+        "beta": 185
+      }
+    },
+    "Grok 4.1 Fast Reasoning": {
+      "THREE_BET": {
+        "tries": 114343,
+        "hits": 34882,
+        "rate": 0.30506458637607897,
+        "alpha": 34883,
+        "beta": 79462
+      },
+      "FOLD_TO_CBET": {
+        "tries": 36657,
+        "hits": 9415,
+        "rate": 0.2568404397522983,
+        "alpha": 9416,
+        "beta": 27243
+      },
+      "CBET": {
+        "tries": 85196,
+        "hits": 75342,
+        "rate": 0.8843372928306493,
+        "alpha": 75343,
+        "beta": 9855
+      },
+      "BARREL_TURN": {
+        "tries": 34294,
+        "hits": 24669,
+        "rate": 0.7193386598238759,
+        "alpha": 24670,
+        "beta": 9626
+      },
+      "BARREL_RIVER": {
+        "tries": 14757,
+        "hits": 8126,
+        "rate": 0.5506539269499221,
+        "alpha": 8127,
+        "beta": 6632
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 25957,
+        "hits": 11716,
+        "rate": 0.45136186770428016,
+        "alpha": 11717,
+        "beta": 14242
+      }
+    },
+    "Grok 4": {
+      "FOLD_TO_THREE_BET": {
+        "tries": 26518,
+        "hits": 10061,
+        "rate": 0.3794026698846067,
+        "alpha": 10062,
+        "beta": 16458
+      },
+      "FOLD_TO_CBET": {
+        "tries": 30205,
+        "hits": 4240,
+        "rate": 0.1403741102466479,
+        "alpha": 4241,
+        "beta": 25966
+      },
+      "THREE_BET": {
+        "tries": 99647,
+        "hits": 56298,
+        "rate": 0.5649743594889961,
+        "alpha": 56299,
+        "beta": 43350
+      },
+      "CBET": {
+        "tries": 109370,
+        "hits": 96107,
+        "rate": 0.8787327420682088,
+        "alpha": 96108,
+        "beta": 13264
+      },
+      "BARREL_TURN": {
+        "tries": 47281,
+        "hits": 35331,
+        "rate": 0.7472557687020156,
+        "alpha": 35332,
+        "beta": 11951
+      },
+      "BARREL_RIVER": {
+        "tries": 20228,
+        "hits": 11288,
+        "rate": 0.558038362665612,
+        "alpha": 11289,
+        "beta": 8941
+      }
+    },
+    "o3": {
+      "CBET": {
+        "tries": 89094,
+        "hits": 72872,
+        "rate": 0.8179226435001234,
+        "alpha": 72873,
+        "beta": 16223
+      },
+      "BARREL_TURN": {
+        "tries": 40280,
+        "hits": 21186,
+        "rate": 0.5259682224428996,
+        "alpha": 21187,
+        "beta": 19095
+      },
+      "THREE_BET": {
+        "tries": 120043,
+        "hits": 37679,
+        "rate": 0.31387919328907143,
+        "alpha": 37680,
+        "beta": 82365
+      },
+      "FOLD_TO_CBET": {
+        "tries": 50024,
+        "hits": 12814,
+        "rate": 0.2561570446185831,
+        "alpha": 12815,
+        "beta": 37211
+      },
+      "BARREL_RIVER": {
+        "tries": 10081,
+        "hits": 3869,
+        "rate": 0.38379129054657274,
+        "alpha": 3870,
+        "beta": 6213
+      },
+      "FOLD_TO_THREE_BET": {
+        "tries": 26907,
+        "hits": 12634,
+        "rate": 0.46954324153565985,
+        "alpha": 12635,
+        "beta": 14274
+      }
+    }
+  }
+}

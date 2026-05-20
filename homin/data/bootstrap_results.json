@@ -1,0 +1,409 @@
+{
+  "pairs": {
+    "random vs callstation": {
+      "random": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.544,
+        "pfr_rate": 0.406,
+        "aggression_factor": 11.318840579710145,
+        "n_aggressive_actions": 781,
+        "n_passive_actions": 69
+      },
+      "callstation": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.668,
+        "pfr_rate": 0.0,
+        "aggression_factor": 0.0,
+        "n_aggressive_actions": 0,
+        "n_passive_actions": 1031
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.806,
+        "wins": {
+          "random": 195,
+          "callstation": 292,
+          "split": 13
+        }
+      }
+    },
+    "random vs nitrock": {
+      "random": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.35,
+        "pfr_rate": 0.186,
+        "aggression_factor": 1.891304347826087,
+        "n_aggressive_actions": 174,
+        "n_passive_actions": 92
+      },
+      "nitrock": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.064,
+        "pfr_rate": 0.058,
+        "aggression_factor": 2.1666666666666665,
+        "n_aggressive_actions": 52,
+        "n_passive_actions": 24
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.04,
+        "wins": {
+          "random": 382,
+          "nitrock": 118,
+          "split": 0
+        }
+      }
+    },
+    "random vs tag": {
+      "random": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.372,
+        "pfr_rate": 0.188,
+        "aggression_factor": 1.8037383177570094,
+        "n_aggressive_actions": 193,
+        "n_passive_actions": 107
+      },
+      "tag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.144,
+        "pfr_rate": 0.138,
+        "aggression_factor": 4.04,
+        "n_aggressive_actions": 101,
+        "n_passive_actions": 25
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.02,
+        "wins": {
+          "random": 358,
+          "tag": 142,
+          "split": 0
+        }
+      }
+    },
+    "random vs lag": {
+      "random": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.45,
+        "pfr_rate": 0.232,
+        "aggression_factor": 1.3313953488372092,
+        "n_aggressive_actions": 229,
+        "n_passive_actions": 172
+      },
+      "lag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.268,
+        "pfr_rate": 0.26,
+        "aggression_factor": 3.6619718309859155,
+        "n_aggressive_actions": 260,
+        "n_passive_actions": 71
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.054,
+        "wins": {
+          "random": 306,
+          "lag": 192,
+          "split": 2
+        }
+      }
+    },
+    "random vs nashjam": {
+      "random": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.372,
+        "pfr_rate": 0.188,
+        "aggression_factor": 1.8037383177570094,
+        "n_aggressive_actions": 193,
+        "n_passive_actions": 107
+      },
+      "nashjam": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.144,
+        "pfr_rate": 0.138,
+        "aggression_factor": 4.04,
+        "n_aggressive_actions": 101,
+        "n_passive_actions": 25
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.02,
+        "wins": {
+          "random": 358,
+          "nashjam": 142,
+          "split": 0
+        }
+      }
+    },
+    "callstation vs nitrock": {
+      "callstation": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.544,
+        "pfr_rate": 0.0,
+        "aggression_factor": 0.0,
+        "n_aggressive_actions": 0,
+        "n_passive_actions": 434
+      },
+      "nitrock": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.092,
+        "pfr_rate": 0.092,
+        "aggression_factor": 184.0,
+        "n_aggressive_actions": 184,
+        "n_passive_actions": 0
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.544,
+        "wins": {
+          "callstation": 340,
+          "nitrock": 151,
+          "split": 9
+        }
+      }
+    },
+    "callstation vs tag": {
+      "callstation": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.606,
+        "pfr_rate": 0.0,
+        "aggression_factor": 0.0,
+        "n_aggressive_actions": 0,
+        "n_passive_actions": 474
+      },
+      "tag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.208,
+        "pfr_rate": 0.208,
+        "aggression_factor": 224.0,
+        "n_aggressive_actions": 224,
+        "n_passive_actions": 0
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.606,
+        "wins": {
+          "callstation": 325,
+          "tag": 164,
+          "split": 11
+        }
+      }
+    },
+    "callstation vs lag": {
+      "callstation": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.724,
+        "pfr_rate": 0.0,
+        "aggression_factor": 0.0,
+        "n_aggressive_actions": 0,
+        "n_passive_actions": 1209
+      },
+      "lag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.406,
+        "pfr_rate": 0.406,
+        "aggression_factor": 959.0,
+        "n_aggressive_actions": 959,
+        "n_passive_actions": 0
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.724,
+        "wins": {
+          "callstation": 291,
+          "lag": 192,
+          "split": 17
+        }
+      }
+    },
+    "callstation vs nashjam": {
+      "callstation": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.606,
+        "pfr_rate": 0.0,
+        "aggression_factor": 0.0,
+        "n_aggressive_actions": 0,
+        "n_passive_actions": 474
+      },
+      "nashjam": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.208,
+        "pfr_rate": 0.208,
+        "aggression_factor": 224.0,
+        "n_aggressive_actions": 224,
+        "n_passive_actions": 0
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.606,
+        "wins": {
+          "callstation": 325,
+          "nashjam": 164,
+          "split": 11
+        }
+      }
+    },
+    "nitrock vs tag": {
+      "nitrock": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.034,
+        "pfr_rate": 0.034,
+        "aggression_factor": 17.0,
+        "n_aggressive_actions": 17,
+        "n_passive_actions": 0
+      },
+      "tag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.106,
+        "pfr_rate": 0.106,
+        "aggression_factor": 53.0,
+        "n_aggressive_actions": 53,
+        "n_passive_actions": 0
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.0,
+        "wins": {
+          "nitrock": 214,
+          "tag": 286,
+          "split": 0
+        }
+      }
+    },
+    "nitrock vs lag": {
+      "nitrock": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.038,
+        "pfr_rate": 0.036,
+        "aggression_factor": 21.0,
+        "n_aggressive_actions": 21,
+        "n_passive_actions": 1
+      },
+      "lag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.196,
+        "pfr_rate": 0.196,
+        "aggression_factor": 32.666666666666664,
+        "n_aggressive_actions": 98,
+        "n_passive_actions": 3
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.002,
+        "wins": {
+          "nitrock": 170,
+          "lag": 330,
+          "split": 0
+        }
+      }
+    },
+    "nitrock vs nashjam": {
+      "nitrock": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.034,
+        "pfr_rate": 0.034,
+        "aggression_factor": 17.0,
+        "n_aggressive_actions": 17,
+        "n_passive_actions": 0
+      },
+      "nashjam": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.106,
+        "pfr_rate": 0.106,
+        "aggression_factor": 53.0,
+        "n_aggressive_actions": 53,
+        "n_passive_actions": 0
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.0,
+        "wins": {
+          "nitrock": 214,
+          "nashjam": 286,
+          "split": 0
+        }
+      }
+    },
+    "tag vs lag": {
+      "tag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.1,
+        "pfr_rate": 0.096,
+        "aggression_factor": 25.5,
+        "n_aggressive_actions": 51,
+        "n_passive_actions": 2
+      },
+      "lag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.192,
+        "pfr_rate": 0.188,
+        "aggression_factor": 32.0,
+        "n_aggressive_actions": 96,
+        "n_passive_actions": 3
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.0,
+        "wins": {
+          "tag": 204,
+          "lag": 296,
+          "split": 0
+        }
+      }
+    },
+    "tag vs nashjam": {
+      "tag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.084,
+        "pfr_rate": 0.078,
+        "aggression_factor": 14.666666666666666,
+        "n_aggressive_actions": 44,
+        "n_passive_actions": 3
+      },
+      "nashjam": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.108,
+        "pfr_rate": 0.106,
+        "aggression_factor": 13.5,
+        "n_aggressive_actions": 54,
+        "n_passive_actions": 4
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.002,
+        "wins": {
+          "tag": 237,
+          "nashjam": 263,
+          "split": 0
+        }
+      }
+    },
+    "lag vs nashjam": {
+      "lag": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.222,
+        "pfr_rate": 0.218,
+        "aggression_factor": 13.875,
+        "n_aggressive_actions": 111,
+        "n_passive_actions": 8
+      },
+      "nashjam": {
+        "preflop_opps": 500,
+        "vpip_rate": 0.12,
+        "pfr_rate": 0.112,
+        "aggression_factor": 16.0,
+        "n_aggressive_actions": 64,
+        "n_passive_actions": 4
+      },
+      "_match": {
+        "n_hands": 500,
+        "showdown_rate": 0.004,
+        "wins": {
+          "lag": 302,
+          "nashjam": 198,
+          "split": 0
+        }
+      }
+    }
+  }
+}

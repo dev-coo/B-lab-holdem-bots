@@ -1,0 +1,592 @@
+{
+  "config": {
+    "a": "/Users/ihomin/Documents/blab/holdem-agent/configs/class_priors.yaml",
+    "b": "/Users/ihomin/Documents/blab/holdem-agent/configs/class_priors.bootstrap_backup.yaml"
+  },
+  "points_a": [
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.0524,
+      "predicted": 0.18514285714285714,
+      "abs_error": 0.13274285714285713
+    },
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.0524,
+      "predicted": 0.162256157635468,
+      "abs_error": 0.109856157635468
+    },
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.0524,
+      "predicted": 0.1340879120879121,
+      "abs_error": 0.0816879120879121
+    },
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.0524,
+      "predicted": 0.10217857142857142,
+      "abs_error": 0.04977857142857142
+    },
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.0508,
+      "predicted": 0.18076190476190476,
+      "abs_error": 0.12996190476190478
+    },
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.0508,
+      "predicted": 0.15835467980295567,
+      "abs_error": 0.10755467980295567
+    },
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.0508,
+      "predicted": 0.13077655677655678,
+      "abs_error": 0.07997655677655678
+    },
+    {
+      "variant": "A",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.0508,
+      "predicted": 0.09953571428571428,
+      "abs_error": 0.048735714285714285
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.1284,
+      "predicted": 0.20114285714285715,
+      "abs_error": 0.07274285714285716
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.1284,
+      "predicted": 0.18860098522167484,
+      "abs_error": 0.06020098522167486
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.1284,
+      "predicted": 0.17316483516483516,
+      "abs_error": 0.044764835164835176
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.1284,
+      "predicted": 0.15567857142857142,
+      "abs_error": 0.02727857142857143
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.1252,
+      "predicted": 0.19542857142857142,
+      "abs_error": 0.07022857142857142
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.1252,
+      "predicted": 0.18332019704433497,
+      "abs_error": 0.058120197044334965
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.1252,
+      "predicted": 0.16841758241758242,
+      "abs_error": 0.04321758241758242
+    },
+    {
+      "variant": "A",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.1252,
+      "predicted": 0.15153571428571427,
+      "abs_error": 0.026335714285714268
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.2568,
+      "predicted": 0.2184761904761905,
+      "abs_error": 0.03832380952380948
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.2568,
+      "predicted": 0.22508374384236451,
+      "abs_error": 0.03171625615763546
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.2568,
+      "predicted": 0.23321611721611718,
+      "abs_error": 0.023583882783882792
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.2568,
+      "predicted": 0.2424285714285714,
+      "abs_error": 0.014371428571428563
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.2536,
+      "predicted": 0.20704761904761904,
+      "abs_error": 0.046552380952380956
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.2536,
+      "predicted": 0.21507389162561574,
+      "abs_error": 0.03852610837438425
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.2536,
+      "predicted": 0.224952380952381,
+      "abs_error": 0.028647619047619005
+    },
+    {
+      "variant": "A",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.2536,
+      "predicted": 0.23614285714285715,
+      "abs_error": 0.017457142857142838
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.6296,
+      "predicted": 0.2417142857142857,
+      "abs_error": 0.3878857142857144
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.6296,
+      "predicted": 0.3085911330049261,
+      "abs_error": 0.32100886699507397
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.6296,
+      "predicted": 0.3909010989010989,
+      "abs_error": 0.23869890109890113
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.6296,
+      "predicted": 0.48414285714285715,
+      "abs_error": 0.1454571428571429
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.0,
+      "predicted": 0.18952380952380954,
+      "abs_error": 0.18952380952380954
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.0,
+      "predicted": 0.1568472906403941,
+      "abs_error": 0.1568472906403941
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.0,
+      "predicted": 0.11663003663003664,
+      "abs_error": 0.11663003663003664
+    },
+    {
+      "variant": "A",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.0,
+      "predicted": 0.07107142857142858,
+      "abs_error": 0.07107142857142858
+    }
+  ],
+  "points_b": [
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.0524,
+      "predicted": 0.18666666666666668,
+      "abs_error": 0.13426666666666667
+    },
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.0524,
+      "predicted": 0.16351724137931034,
+      "abs_error": 0.11111724137931034
+    },
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.0524,
+      "predicted": 0.13502564102564102,
+      "abs_error": 0.08262564102564102
+    },
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.0524,
+      "predicted": 0.10275000000000001,
+      "abs_error": 0.050350000000000006
+    },
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.0508,
+      "predicted": 0.18166666666666667,
+      "abs_error": 0.1308666666666667
+    },
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.0508,
+      "predicted": 0.15910344827586204,
+      "abs_error": 0.10830344827586204
+    },
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.0508,
+      "predicted": 0.13133333333333333,
+      "abs_error": 0.08053333333333333
+    },
+    {
+      "variant": "B",
+      "strategy": "nitrock",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.0508,
+      "predicted": 0.09987499999999999,
+      "abs_error": 0.049074999999999994
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.1284,
+      "predicted": 0.20333333333333334,
+      "abs_error": 0.07493333333333335
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.1284,
+      "predicted": 0.19041379310344828,
+      "abs_error": 0.06201379310344829
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.1284,
+      "predicted": 0.1745128205128205,
+      "abs_error": 0.04611282051282051
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.1284,
+      "predicted": 0.15649999999999997,
+      "abs_error": 0.028099999999999986
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.1252,
+      "predicted": 0.19666666666666666,
+      "abs_error": 0.07146666666666665
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.1252,
+      "predicted": 0.1843448275862069,
+      "abs_error": 0.0591448275862069
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.1252,
+      "predicted": 0.16917948717948716,
+      "abs_error": 0.04397948717948716
+    },
+    {
+      "variant": "B",
+      "strategy": "tag",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.1252,
+      "predicted": 0.152,
+      "abs_error": 0.02679999999999999
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.2568,
+      "predicted": 0.22,
+      "abs_error": 0.03679999999999997
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.2568,
+      "predicted": 0.2263448275862069,
+      "abs_error": 0.030455172413793086
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.2568,
+      "predicted": 0.23415384615384616,
+      "abs_error": 0.022646153846153816
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.2568,
+      "predicted": 0.24299999999999997,
+      "abs_error": 0.013800000000000007
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.2536,
+      "predicted": 0.20666666666666667,
+      "abs_error": 0.04693333333333333
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.2536,
+      "predicted": 0.21475862068965518,
+      "abs_error": 0.038841379310344815
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.2536,
+      "predicted": 0.2247179487179487,
+      "abs_error": 0.02888205128205129
+    },
+    {
+      "variant": "B",
+      "strategy": "lag",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.2536,
+      "predicted": 0.236,
+      "abs_error": 0.017600000000000005
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 0,
+      "observed": 0.6296,
+      "predicted": 0.23666666666666666,
+      "abs_error": 0.39293333333333336
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 10,
+      "observed": 0.6296,
+      "predicted": 0.30441379310344824,
+      "abs_error": 0.3251862068965518
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 30,
+      "observed": 0.6296,
+      "predicted": 0.3877948717948718,
+      "abs_error": 0.24180512820512823
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "VPIP",
+      "n": 80,
+      "observed": 0.6296,
+      "predicted": 0.48225,
+      "abs_error": 0.14735000000000004
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 0,
+      "observed": 0.0,
+      "predicted": 0.19333333333333333,
+      "abs_error": 0.19333333333333333
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 10,
+      "observed": 0.0,
+      "predicted": 0.15999999999999998,
+      "abs_error": 0.15999999999999998
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 30,
+      "observed": 0.0,
+      "predicted": 0.11897435897435897,
+      "abs_error": 0.11897435897435897
+    },
+    {
+      "variant": "B",
+      "strategy": "callstation",
+      "metric": "PFR",
+      "n": 80,
+      "observed": 0.0,
+      "predicted": 0.0725,
+      "abs_error": 0.0725
+    }
+  ],
+  "summary": {
+    "mae_a": 0.09404642146646458,
+    "mae_b": 0.09524154302055703,
+    "welch_t": -0.05457006386017113,
+    "p_approx": 0.9564809887867176
+  }
+}

@@ -1,0 +1,67 @@
+# Week 2 임시 Push/Fold 차트.
+# 수치: chip-EV Nash 근사 (HoldemResources publicly documented ranges, coarse 보간).
+# R5 (주 7) 에서 정식 ICMIZER/HRC 값으로 교체 예정.
+#
+# M bucket: "max_M" 가 상한 (inclusive). max_M=null → 모든 상위 M.
+# position_class: EP / MP / LP / BLIND (configs/position_class_map.yaml 참조).
+# "any" 필드는 pos_class 별 값보다 우선순위 낮음.
+#
+# Hand shorthand:
+#   "22+", "A2s+", "KTo+", "AKs", "AKo", "AA"
+#   "any" = 169 전체
+#
+# BOT_GUIDE §11: M = stack / (sb + bb).
+
+version: 0.1
+stage: draft
+source: "Nash chip-EV approximation, Week 2 임시. R5 에서 실증 교체."
+
+jam_ranges:
+  # 2 미만: 스택이 블라인드 2배 이하 → any two
+  - max_M: 2.0
+    any: "any"
+
+  # 2 < M ≤ 4
+  - max_M: 4.0
+    EP:    "22+,A2s+,A7o+,K7s+,KTo+,QJs,QJo,JTs"
+    MP:    "22+,A2s+,A5o+,K5s+,K9o+,Q8s+,QTo+,J8s+,JTo,T9s"
+    LP:    "22+,A2s+,A2o+,K2s+,K5o+,Q2s+,Q8o+,J5s+,J8o+,T6s+,T8o,97s+,86s+,75s+,65s,54s"
+    BLIND: "22+,A2s+,A2o+,K2s+,K7o+,Q4s+,Q9o+,J7s+,JTo,T7s+,98s,87s,76s,65s"
+
+  # 4 < M ≤ 6
+  - max_M: 6.0
+    EP:    "44+,ATs+,AQo+,KTs+,KQo"
+    MP:    "22+,A7s+,ATo+,KTs+,KJo,QJs,QJo"
+    LP:    "22+,A2s+,A5o+,K6s+,K9o+,Q8s+,QTo+,J8s+,JTo,T8s+,98s"
+    BLIND: "22+,A2s+,A7o+,K6s+,KTo+,Q8s+,QTo+,J8s+,JTo,T8s+,98s,87s"
+
+  # 6 < M ≤ 8
+  - max_M: 8.0
+    EP:    "99+,AJs+,AQo+"
+    MP:    "66+,ATs+,AQo+,KQs,KQo"
+    LP:    "22+,A4s+,A9o+,KTs+,KJo+,QTs+,QJo,JTs"
+    BLIND: "33+,A8s+,AJo+,K9s+,KJo+,QTs+,QJo,JTs"
+
+hybrid_open_ranges:
+  # 8 < M ≤ 15: min-raise open. M > 15 는 mode=mid 로 이관 (D2).
+  - max_M: 15.0
+    EP:    "77+,AJs+,AQo+,KQs"
+    MP:    "55+,ATs+,AJo+,KJs+,KQo,QJs"
+    LP:    "22+,A2s+,A9o+,K9s+,KJo+,Q9s+,QJo,J9s+,JTo,T9s"
+    BLIND: "44+,A7s+,ATo+,K9s+,KJo+,QTs+,QJo,JTs"
+
+call_vs_jam_ranges:
+  # 상대 all-in 시 콜 범위. 타이트하게.
+  - max_M: 3.0
+    any: "22+,A2s+,A2o+,K2s+,K8o+,Q5s+,QTo+,J8s+,JTo,T8s+,98s,87s,76s"
+  - max_M: 6.0
+    any: "33+,A7s+,ATo+,K9s+,KTo+,QTs+,QJo,JTs"
+  - max_M: 10.0
+    any: "77+,AQs,AQo,AKs,AKo,KQs"
+  - max_M: 20.0
+    any: "99+,AKs,AKo"
+  - max_M: null
+    any: "QQ+,AKs"
+
+# 참조: 이 값들은 HoldemResources chip-EV 근사값.
+# R5 (주 7) 에서 ICMIZER 정식 차트로 교체 시 이 파일 v0.2 → v1.0 Validated.

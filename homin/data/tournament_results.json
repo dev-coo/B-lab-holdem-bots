@@ -1,0 +1,175 @@
+{
+  "schedule": {
+    "starting_stack": 300,
+    "n_levels": 20
+  },
+  "config": {
+    "per_pair": 5,
+    "max_hands": 500,
+    "seed": 0,
+    "output": "data/tournament_results.json"
+  },
+  "pairs": {
+    "random vs callstation": {
+      "wins_a": 4,
+      "wins_b": 1,
+      "splits": 0,
+      "avg_hands": 50.4,
+      "avg_final_level": 5.6
+    },
+    "random vs nitrock": {
+      "wins_a": 5,
+      "wins_b": 0,
+      "splits": 0,
+      "avg_hands": 65.8,
+      "avg_final_level": 7.4
+    },
+    "random vs tag": {
+      "wins_a": 4,
+      "wins_b": 1,
+      "splits": 0,
+      "avg_hands": 59.6,
+      "avg_final_level": 6.6
+    },
+    "random vs lag": {
+      "wins_a": 4,
+      "wins_b": 1,
+      "splits": 0,
+      "avg_hands": 49.8,
+      "avg_final_level": 5.6
+    },
+    "random vs nashjam": {
+      "wins_a": 3,
+      "wins_b": 2,
+      "splits": 0,
+      "avg_hands": 57.0,
+      "avg_final_level": 6.6
+    },
+    "callstation vs nitrock": {
+      "wins_a": 2,
+      "wins_b": 3,
+      "splits": 0,
+      "avg_hands": 36.8,
+      "avg_final_level": 4.4
+    },
+    "callstation vs tag": {
+      "wins_a": 2,
+      "wins_b": 3,
+      "splits": 0,
+      "avg_hands": 40.8,
+      "avg_final_level": 4.8
+    },
+    "callstation vs lag": {
+      "wins_a": 0,
+      "wins_b": 5,
+      "splits": 0,
+      "avg_hands": 28.4,
+      "avg_final_level": 3.6
+    },
+    "callstation vs nashjam": {
+      "wins_a": 2,
+      "wins_b": 3,
+      "splits": 0,
+      "avg_hands": 50.4,
+      "avg_final_level": 5.8
+    },
+    "nitrock vs tag": {
+      "wins_a": 0,
+      "wins_b": 5,
+      "splits": 0,
+      "avg_hands": 91.2,
+      "avg_final_level": 11.0
+    },
+    "nitrock vs lag": {
+      "wins_a": 0,
+      "wins_b": 5,
+      "splits": 0,
+      "avg_hands": 77.6,
+      "avg_final_level": 9.0
+    },
+    "nitrock vs nashjam": {
+      "wins_a": 0,
+      "wins_b": 5,
+      "splits": 0,
+      "avg_hands": 67.4,
+      "avg_final_level": 7.8
+    },
+    "tag vs lag": {
+      "wins_a": 2,
+      "wins_b": 3,
+      "splits": 0,
+      "avg_hands": 69.4,
+      "avg_final_level": 8.0
+    },
+    "tag vs nashjam": {
+      "wins_a": 1,
+      "wins_b": 4,
+      "splits": 0,
+      "avg_hands": 76.4,
+      "avg_final_level": 8.8
+    },
+    "lag vs nashjam": {
+      "wins_a": 2,
+      "wins_b": 3,
+      "splits": 0,
+      "avg_hands": 61.6,
+      "avg_final_level": 6.8
+    }
+  },
+  "totals": [
+    {
+      "name": "random",
+      "wins": 20,
+      "losses": 5,
+      "splits": 0,
+      "winrate": 0.8,
+      "avg_hands": 56.52,
+      "avg_level": 6.36
+    },
+    {
+      "name": "nashjam",
+      "wins": 17,
+      "losses": 8,
+      "splits": 0,
+      "winrate": 0.68,
+      "avg_hands": 62.56,
+      "avg_level": 7.16
+    },
+    {
+      "name": "lag",
+      "wins": 16,
+      "losses": 9,
+      "splits": 0,
+      "winrate": 0.64,
+      "avg_hands": 57.36,
+      "avg_level": 6.6
+    },
+    {
+      "name": "tag",
+      "wins": 12,
+      "losses": 13,
+      "splits": 0,
+      "winrate": 0.48,
+      "avg_hands": 67.48,
+      "avg_level": 7.84
+    },
+    {
+      "name": "callstation",
+      "wins": 7,
+      "losses": 18,
+      "splits": 0,
+      "winrate": 0.28,
+      "avg_hands": 41.36,
+      "avg_level": 4.84
+    },
+    {
+      "name": "nitrock",
+      "wins": 3,
+      "losses": 22,
+      "splits": 0,
+      "winrate": 0.12,
+      "avg_hands": 67.76,
+      "avg_level": 7.92
+    }
+  ]
+}

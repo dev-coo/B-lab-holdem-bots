@@ -1,0 +1,30 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Runtime logs & data
+data/logs/
+data/raw/
+data/processed/
+
+# 대용량 외부 데이터셋 (원본은 Kaggle 공개)
+data/kaggle/
+
+# 분석 산출물 (대용량 CSV)
+data/bluff_decisions.csv
+
+# Runtime 상태 (서버 게임 진행 중 누적되는 동적 데이터)
+data/profiles.db
+data/*.pid

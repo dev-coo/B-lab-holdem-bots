@@ -1,0 +1,68 @@
+# 9-max RFI (Raise First In) 기본 범위.
+# 문헌값 (Upswing / PokerCoaching GTO-근사 oversimplified). Week 3 D2 초기값.
+# plan H.3 — opening chart: 개인 데이터 없어도 포지션 기반 디폴트.
+#
+# Position class 기준 (configs/position_class_map.yaml):
+#   EP    — utg / utg1
+#   MP    — mp / mp1 / hj
+#   LP    — co / btn (RFI 가장 넓음)
+#   BLIND — sb (스틸), bb (defense 는 별도)
+#
+# Range shorthand: configs/nash_charts/ 와 동일 파서.
+
+version: 0.1
+stage: draft
+source: "문헌값 근사 (Upswing 9-max 차트 기반)."
+
+ranges:
+  EP:    "77+,AJs+,AQo+,KQs"
+  MP:    "55+,ATs+,AJo+,KJs+,KQo,QJs"
+  LP:    "22+,A2s+,A9o+,K9s+,KJo+,Q9s+,QJo,J9s+,JTo,T9s,98s"
+  BLIND: "22+,A2s+,A9o+,K9s+,KJo+,Q9s+,QJo,J9s+,JTo,T9s"
+
+# P-Adapt2: 테이블 평균 VPIP ≥ 0.40 (loose-passive 메타) 일 때 사용할 확장 RFI.
+# isolation 빈도를 늘려 chip 누적 기회 확대. EP 는 reverse-implied odds 위험 그대로 유지,
+# MP/LP/BLIND 는 확장 (LP 가 핵심).
+loose_meta_ranges:
+  EP:    "77+,AJs+,AQo+,KQs"
+  MP:    "44+,A9s+,ATo+,K9s+,KJo+,QTs+,QJo,JTs"
+  LP:    "22+,A2s+,A2o+,K2s+,K7o+,Q5s+,Q9o+,J7s+,JTo,T7s+,T9o,97s+,86s+,75s+,65s,54s"
+  BLIND: "22+,A2s+,A4o+,K6s+,K9o+,Q8s+,QTo+,J8s+,JTo,T8s+,T9o,98s,87s"
+
+# P5-1: 5-max RFI (실서버 메타 대응 — 5명 테이블 압도). position_class_map.yaml
+# 의 5-max 분기에서 BTN→LP, CO→MP, UTG→EP. 9-max chart 보다 전반적으로 wider.
+ranges_5max:
+  EP:    "44+,A8s+,ATo+,KTs+,KJo+,QTs+,QJo,JTs,T9s"   # 5-max UTG, ~16%
+  MP:    "22+,A2s+,A8o+,K7s+,KTo+,Q9s+,QJo,J9s+,JTo,T9s,98s,87s,76s"  # 5-max CO, ~30%
+  LP:    "22+,A2s+,A2o+,K2s+,K6o+,Q4s+,Q9o+,J6s+,J9o+,T6s+,T8o+,96s+,98o,85s+,75s+,64s+,53s+"  # 5-max BTN, ~60%
+  BLIND: "22+,A2s+,A8o+,K7s+,KTo+,Q9s+,QJo,J9s+,JTo,T9s,98s,87s,76s"  # 5-max SB unopened steal, ~30%
+
+# 5-max loose-passive 메타 적응 (avg VPIP ≥ 0.40) — LP/MP/BLIND 추가 확장.
+loose_meta_ranges_5max:
+  EP:    "44+,A8s+,ATo+,KTs+,KJo+,QTs+,QJo,JTs,T9s"
+  MP:    "22+,A2s+,A4o+,K5s+,K9o+,Q7s+,QTo+,J7s+,JTo,T7s+,T9o,97s+,86s+,76s,65s,54s"
+  LP:    "22+,A2s+,A2o+,K2s+,K2o+,Q2s+,Q5o+,J3s+,J7o+,T5s+,T7o+,95s+,97o+,84s+,86o+,73s+,75o+,63s+,53s+,43s,32s"
+  BLIND: "22+,A2s+,A4o+,K5s+,K9o+,Q7s+,QTo+,J7s+,JTo,T7s+,T9o,97s+,86s+,76s,65s,54s"
+
+# v5-A: 6-max RFI (실서버 메타 대응). position_class_map.yaml 의 6-max 분기에서
+# BTN→LP, CO→MP, HJ→MP, UTG→EP. 6-max GTO baseline 근사 — 5-max 보다 약간 tight,
+# 9-max 보다는 wider. 6p 세션 ITM 회복 (50% → 60%) 의 핵심.
+ranges_6max:
+  EP:    "55+,ATs+,AJo+,KTs+,KQo,QTs+,JTs"   # 6-max UTG, ~17%
+  MP:    "33+,A8s+,ATo+,K9s+,KJo+,Q9s+,QJo,J9s+,JTo,T9s,98s,87s"  # 6-max CO/HJ, ~25%
+  LP:    "22+,A2s+,A7o+,K7s+,K9o+,Q8s+,QTo+,J8s+,JTo,T7s+,T9o,97s+,86s+,75s+,65s,54s"  # 6-max BTN, ~50%
+  BLIND: "22+,A2s+,A8o+,K8s+,KTo+,Q9s+,QJo,J9s+,JTo,T9s,98s,87s,76s"  # 6-max SB unopened steal, ~25%
+
+# 6-max loose-passive 메타 (avg VPIP ≥ 0.40) — MP/LP/BLIND 확장.
+loose_meta_ranges_6max:
+  EP:    "55+,A9s+,AJo+,KTs+,KQo,QTs+,JTs"
+  MP:    "22+,A5s+,A9o+,K7s+,KTo+,Q8s+,QTo+,J8s+,JTo,T8s+,T9o,97s+,86s+,76s,65s"
+  LP:    "22+,A2s+,A2o+,K2s+,K7o+,Q5s+,Q9o+,J6s+,J9o+,T6s+,T8o+,96s+,98o,85s+,74s+,64s+,53s+"
+  BLIND: "22+,A2s+,A4o+,K6s+,K9o+,Q8s+,QTo+,J8s+,JTo,T8s+,T9o,98s,87s,76s,65s"
+
+# RFI 사이즈 (bb 배수). 차트/문헌 기본값.
+rfi_size_bb:
+  EP: 3.0
+  MP: 2.8
+  LP: 2.5
+  BLIND: 3.0

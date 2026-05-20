@@ -1,0 +1,225 @@
+{
+  "dataset": "kaggle/poker-heads-up",
+  "scanned_files": 105,
+  "total_hands": 2059400,
+  "game_types": {
+    "No Limit": 2059400
+  },
+  "stakes_distribution": {
+    "(1, 2)": 2059400
+  },
+  "n_players_per_hand": {
+    "2": 2059400
+  },
+  "player_names_unique": [
+    "Claude Opus 4.5",
+    "Claude Opus 4.6",
+    "Claude Sonnet 4.5",
+    "Claude Sonnet 4.6",
+    "DeepSeek V3.2",
+    "GPT-5 mini",
+    "GPT-5.2",
+    "GPT-5.4",
+    "GPT-5.4 mini",
+    "Gemini 3 Flash Preview",
+    "Gemini 3 Pro Preview",
+    "Gemini 3.1 Pro Preview",
+    "Grok 4",
+    "Grok 4.1 Fast Reasoning",
+    "o3"
+  ],
+  "model_hand_counts": {},
+  "model_winnings": {
+    "Claude Opus 4.5": 3560976.0,
+    "Claude Opus 4.6": 3798386.0,
+    "Claude Sonnet 4.5": 4041506.0,
+    "Claude Sonnet 4.6": 4106096.0,
+    "DeepSeek V3.2": 3984155.0,
+    "GPT-5.2": 4327338.0,
+    "GPT-5.4": 3515751.0,
+    "GPT-5.4 mini": 3828278.0,
+    "GPT-5 mini": 3189949.0,
+    "Gemini 3.1 Pro Preview": 1612012.0,
+    "Gemini 3 Flash Preview": 2856482.0,
+    "Gemini 3 Pro Preview": 1613371.0,
+    "Grok 4.1 Fast Reasoning": 4160995.0,
+    "Grok 4": 6393527.0,
+    "o3": 4560994.0
+  },
+  "model_hand_participations": {
+    "Claude Opus 4.5": 279800,
+    "Claude Opus 4.6": 274800,
+    "Claude Sonnet 4.5": 280000,
+    "Claude Sonnet 4.6": 272700,
+    "DeepSeek V3.2": 279800,
+    "GPT-5.2": 280000,
+    "GPT-5.4": 267300,
+    "GPT-5.4 mini": 269000,
+    "GPT-5 mini": 280000,
+    "Gemini 3.1 Pro Preview": 275800,
+    "Gemini 3 Flash Preview": 280000,
+    "Gemini 3 Pro Preview": 239600,
+    "Grok 4.1 Fast Reasoning": 280000,
+    "Grok 4": 280000,
+    "o3": 280000
+  },
+  "action_vocab": {
+    "raises": 2482621,
+    "calls": 2204831,
+    "checks": 2005840,
+    "bets": 1858152,
+    "folds": 1774483
+  },
+  "showdown_hand_count": 272602,
+  "streets_ended": {
+    "turn": 281479,
+    "preflop": 912487,
+    "flop": 434621,
+    "river": 430813
+  },
+  "preflop_fold_count": 912487,
+  "bet_sizes_relative_to_pot": [],
+  "hole_card_format_samples": [
+    "2c",
+    "2d",
+    "2h",
+    "2s",
+    "3c",
+    "3d",
+    "3h",
+    "3s",
+    "4c",
+    "4d",
+    "4h",
+    "4s",
+    "5c",
+    "5d",
+    "5h",
+    "5s",
+    "6c",
+    "6d",
+    "6h",
+    "6s",
+    "7c",
+    "7d",
+    "7h",
+    "7s",
+    "8c",
+    "8d",
+    "8h",
+    "8s",
+    "9c",
+    "9d",
+    "9h",
+    "9s",
+    "Ac",
+    "Ad",
+    "Ah",
+    "As",
+    "Jc",
+    "Jd",
+    "Jh",
+    "Js",
+    "Kc",
+    "Kd",
+    "Kh",
+    "Ks",
+    "Qc",
+    "Qd",
+    "Qh",
+    "Qs",
+    "Tc",
+    "Td",
+    "Th",
+    "Ts"
+  ],
+  "btn_seat_distribution": {
+    "2": 1029700,
+    "1": 1029700
+  },
+  "starting_stack_distribution": {
+    "200": 4118800
+  },
+  "derived": {
+    "showdown_ratio": 0.1323696222200641,
+    "preflop_end_ratio": 0.4430839079343498,
+    "unique_models": 15,
+    "model_rough_profit_proxy": {
+      "Claude Opus 4.5": {
+        "total_collected": 3560976.0,
+        "hands_played": 279800,
+        "collected_per_hand": 12.7269
+      },
+      "Claude Opus 4.6": {
+        "total_collected": 3798386.0,
+        "hands_played": 274800,
+        "collected_per_hand": 13.8224
+      },
+      "Claude Sonnet 4.5": {
+        "total_collected": 4041506.0,
+        "hands_played": 280000,
+        "collected_per_hand": 14.4339
+      },
+      "Claude Sonnet 4.6": {
+        "total_collected": 4106096.0,
+        "hands_played": 272700,
+        "collected_per_hand": 15.0572
+      },
+      "DeepSeek V3.2": {
+        "total_collected": 3984155.0,
+        "hands_played": 279800,
+        "collected_per_hand": 14.2393
+      },
+      "GPT-5.2": {
+        "total_collected": 4327338.0,
+        "hands_played": 280000,
+        "collected_per_hand": 15.4548
+      },
+      "GPT-5.4": {
+        "total_collected": 3515751.0,
+        "hands_played": 267300,
+        "collected_per_hand": 13.1528
+      },
+      "GPT-5.4 mini": {
+        "total_collected": 3828278.0,
+        "hands_played": 269000,
+        "collected_per_hand": 14.2315
+      },
+      "GPT-5 mini": {
+        "total_collected": 3189949.0,
+        "hands_played": 280000,
+        "collected_per_hand": 11.3927
+      },
+      "Gemini 3.1 Pro Preview": {
+        "total_collected": 1612012.0,
+        "hands_played": 275800,
+        "collected_per_hand": 5.8449
+      },
+      "Gemini 3 Flash Preview": {
+        "total_collected": 2856482.0,
+        "hands_played": 280000,
+        "collected_per_hand": 10.2017
+      },
+      "Gemini 3 Pro Preview": {
+        "total_collected": 1613371.0,
+        "hands_played": 239600,
+        "collected_per_hand": 6.7336
+      },
+      "Grok 4.1 Fast Reasoning": {
+        "total_collected": 4160995.0,
+        "hands_played": 280000,
+        "collected_per_hand": 14.8607
+      },
+      "Grok 4": {
+        "total_collected": 6393527.0,
+        "hands_played": 280000,
+        "collected_per_hand": 22.834
+      },
+      "o3": {
+        "total_collected": 4560994.0,
+        "hands_played": 280000,
+        "collected_per_hand": 16.2893
+      }
+    }
+  }
+}

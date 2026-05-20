@@ -1,0 +1,99 @@
+{
+  "mode": "multi",
+  "schedule": {
+    "starting_stack": 300,
+    "n_levels": 20
+  },
+  "config": {
+    "mode": "multi",
+    "per_pair": 10,
+    "tourns": 200,
+    "max_hands": 500,
+    "seed": 1,
+    "output": "/Users/ihomin/Documents/blab/holdem-agent/data/baselines/p3_safe_200.json",
+    "include_bot": true,
+    "bot_mode": "safe",
+    "final_table_size": 4
+  },
+  "totals": [
+    {
+      "name": "bot-safe",
+      "wins": 55,
+      "first_place_rate": 27.500000000000004,
+      "itm": 70,
+      "itm_pct": 35.0,
+      "avg_rank": 2.475,
+      "avg_pts": 3.525,
+      "bubble_survival_rate": 62.0,
+      "mean_chips_at_final_table": 562.6693548387096
+    },
+    {
+      "name": "lag",
+      "wins": 54,
+      "first_place_rate": 27.0,
+      "itm": 70,
+      "itm_pct": 35.0,
+      "avg_rank": 2.61,
+      "avg_pts": 3.39,
+      "bubble_survival_rate": 56.49999999999999,
+      "mean_chips_at_final_table": 527.362831858407
+    },
+    {
+      "name": "nashjam",
+      "wins": 38,
+      "first_place_rate": 19.0,
+      "itm": 81,
+      "itm_pct": 40.5,
+      "avg_rank": 2.22,
+      "avg_pts": 3.78,
+      "bubble_survival_rate": 78.0,
+      "mean_chips_at_final_table": 555.9551282051282
+    },
+    {
+      "name": "random",
+      "wins": 26,
+      "first_place_rate": 13.0,
+      "itm": 33,
+      "itm_pct": 16.5,
+      "avg_rank": 3.975,
+      "avg_pts": 2.025,
+      "bubble_survival_rate": 28.999999999999996,
+      "mean_chips_at_final_table": 623.2758620689655
+    },
+    {
+      "name": "tag",
+      "wins": 18,
+      "first_place_rate": 9.0,
+      "itm": 87,
+      "itm_pct": 43.5,
+      "avg_rank": 2.24,
+      "avg_pts": 3.76,
+      "bubble_survival_rate": 76.0,
+      "mean_chips_at_final_table": 521.9671052631579
+    },
+    {
+      "name": "nitrock",
+      "wins": 5,
+      "first_place_rate": 2.5,
+      "itm": 51,
+      "itm_pct": 25.5,
+      "avg_rank": 2.335,
+      "avg_pts": 3.665,
+      "bubble_survival_rate": 82.0,
+      "mean_chips_at_final_table": 410.3414634146341
+    },
+    {
+      "name": "callstation",
+      "wins": 4,
+      "first_place_rate": 2.0,
+      "itm": 8,
+      "itm_pct": 4.0,
+      "avg_rank": 5.145,
+      "avg_pts": 0.855,
+      "bubble_survival_rate": 12.0,
+      "mean_chips_at_final_table": 880.125
+    }
+  ],
+  "avg_hands": 97.13,
+  "avg_final_level": 11.705
+}

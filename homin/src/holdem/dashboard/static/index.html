@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>Holdem Bot Dashboard</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<style>
+  :root {
+    --bg: #0f1115;
+    --panel: #171a21;
+    --panel2: #1d2029;
+    --fg: #e6e8eb;
+    --fg-dim: #8b92a1;
+    --accent: #5ab0ff;
+    --ok: #6ddf8a;
+    --warn: #ffc86b;
+    --err: #ff7a7a;
+    --border: #262a35;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font: 13px/1.4 -apple-system, SF Mono, Menlo, monospace; }
+  header { padding: 10px 16px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 16px; position: sticky; top: 0; background: var(--bg); z-index: 10; }
+  header h1 { font-size: 14px; margin: 0; font-weight: 600; letter-spacing: 0.3px; }
+  header .status { display: flex; gap: 14px; align-items: center; font-size: 12px; color: var(--fg-dim); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 5px; vertical-align: middle; }
+  .dot.ok { background: var(--ok); }
+  .dot.err { background: var(--err); }
+  .dot.warn { background: var(--warn); }
+  nav { padding: 0 16px; border-bottom: 1px solid var(--border); display: flex; gap: 4px; background: var(--panel); }
+  nav button { background: none; border: none; color: var(--fg-dim); padding: 10px 14px; cursor: pointer; font: inherit; border-bottom: 2px solid transparent; }
+  nav button.active { color: var(--fg); border-bottom-color: var(--accent); }
+  nav button:hover { color: var(--fg); }
+  main { padding: 16px; }
+  section { display: none; }
+  section.active { display: block; }
+  h2 { font-size: 13px; color: var(--fg-dim); font-weight: 600; text-transform: uppercase; letter-spacing: 0.6px; margin: 0 0 10px 0; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-bottom: 20px; }
+  .card { background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 12px; }
+  .card .label { font-size: 11px; color: var(--fg-dim); text-transform: uppercase; letter-spacing: 0.5px; }
+  .card .value { font-size: 20px; font-weight: 600; margin-top: 4px; word-break: break-all; }
+  .card .sub { font-size: 11px; color: var(--fg-dim); margin-top: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12px; background: var(--panel); border: 1px solid var(--border); border-radius: 6px; }
+  thead th:first-child { border-top-left-radius: 6px; }
+  thead th:last-child { border-top-right-radius: 6px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--border); }
+  th { background: var(--panel2); color: var(--fg-dim); font-weight: 600; text-transform: uppercase; font-size: 11px; letter-spacing: 0.4px; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--panel2); }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .bar { display: inline-block; height: 6px; background: var(--border); border-radius: 3px; overflow: hidden; vertical-align: middle; width: 60px; margin-right: 4px; }
+  .bar > span { display: block; height: 100%; background: var(--accent); }
+  .badge { display: inline-block; padding: 1px 6px; border-radius: 3px; font-size: 11px; font-weight: 600; }
+  .badge.NIT { background: #3b3f47; color: #d8dae0; }
+  .badge.TAG { background: #2b4f3f; color: #6ddf8a; }
+  .badge.LAG { background: #5a3b2b; color: #ffc86b; }
+  .badge.Fish { background: #4a2e3a; color: #ff9fc4; }
+  .badge.unknown { background: #2b2e35; color: var(--fg-dim); }
+  pre.log { background: var(--panel); border: 1px solid var(--border); padding: 10px; margin: 0; max-height: 70vh; overflow: auto; font-size: 11px; line-height: 1.5; white-space: pre-wrap; word-break: break-all; }
+  .ev-INFO { color: var(--fg); }
+  .ev-WARNING { color: var(--warn); }
+  .ev-ERROR { color: var(--err); }
+  .ev-DEBUG { color: var(--fg-dim); }
+  .toolbar { display: flex; gap: 8px; align-items: center; margin-bottom: 8px; }
+  .toolbar input { background: var(--panel); border: 1px solid var(--border); color: var(--fg); padding: 4px 8px; border-radius: 4px; font: inherit; }
+  .toolbar button { background: var(--panel); border: 1px solid var(--border); color: var(--fg); padding: 4px 10px; border-radius: 4px; font: inherit; cursor: pointer; }
+  .toolbar button:hover { background: var(--panel2); }
+  .empty { color: var(--fg-dim); padding: 20px; text-align: center; }
+  footer { padding: 10px 16px; color: var(--fg-dim); font-size: 11px; border-top: 1px solid var(--border); }
+
+  /* custom tooltip — always renders below the element to avoid header/table clipping */
+  .tip { position: relative; cursor: help; border-bottom: 1px dotted var(--fg-dim); }
+  .tip::after {
+    content: attr(data-tip);
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%);
+    background: #0b0d12;
+    color: var(--fg);
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 8px 10px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.45;
+    text-transform: none;
+    letter-spacing: normal;
+    white-space: pre-line;
+    width: max-content;
+    max-width: 320px;
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s, visibility 0.12s;
+    z-index: 9999;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+  }
+  .tip::before {
+    content: '';
+    position: absolute;
+    top: calc(100% + 3px);
+    left: 50%;
+    transform: translateX(-50%);
+    border: 5px solid transparent;
+    border-bottom-color: var(--border);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.12s;
+    z-index: 9999;
+  }
+  .tip:hover::after, .tip:hover::before { opacity: 1; visibility: visible; }
+  /* 행 컨테이너가 tooltip 을 자르지 않도록 */
+  table, thead, tbody, tr, th, td { overflow: visible; }
+
+  /* 카드(홀/보드) */
+  .cards-cell { font-family: ui-monospace, SF Mono, Menlo, monospace; font-weight: 600; }
+  .card-chip { display: inline-block; padding: 1px 5px; border-radius: 3px; margin-right: 2px; background: #1d2029; }
+  .card-chip.s, .card-chip.c { color: #d8dae0; }  /* 검정 무늬 */
+  .card-chip.h, .card-chip.d { color: #ff7a7a; }  /* 빨강 무늬 */
+
+  /* 결정 뱃지 */
+  .act-badge { display: inline-block; padding: 2px 7px; border-radius: 3px; font-weight: 600; font-size: 11px; }
+  .act-fold { background: #3a3f4a; color: #8b92a1; }
+  .act-check { background: #2b3949; color: #7fb0ff; }
+  .act-call { background: #2b4a39; color: #6ddf8a; }
+  .act-raise { background: #5a3b2b; color: #ffc86b; }
+  .act-allin { background: #5a2b3b; color: #ff7a9f; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Holdem Bot Dashboard</h1>
+  <div class="status" id="hdr-status">
+    <span><span class="dot err" id="dot-run"></span><span id="txt-run">loading…</span></span>
+    <span id="txt-pid"></span>
+    <span id="txt-uptime"></span>
+    <span id="txt-refresh" style="margin-left:auto"></span>
+    <select id="sel-mode" style="background:var(--panel); color:var(--fg); border:1px solid var(--border); padding:3px 6px; border-radius:4px; font:inherit;">
+      <option value="safe" selected>safe</option>
+      <option value="ev-tree">ev-tree</option>
+      <option value="full">full (LLM)</option>
+    </select>
+    <button id="btn-start" onclick="startBot()"
+            style="background:#2b4a39; color:#d4ffd4; border:1px solid #3b8a5b;
+                   padding:4px 10px; border-radius:4px; font:inherit; cursor:pointer;">
+      봇 시작
+    </button>
+    <button id="btn-stop" onclick="stopBot()"
+            style="background:#5a2b2b; color:#ffd4d4; border:1px solid #8a3b3b;
+                   padding:4px 10px; border-radius:4px; font:inherit; cursor:pointer;">
+      봇 종료
+    </button>
+  </div>
+</header>
+<div id="js-error" style="display:none; background:#5a2b2b; color:#ffd4d4; padding:8px 16px; font-family:SF Mono,monospace; font-size:12px; white-space:pre-wrap; border-bottom:1px solid #8a3b3b"></div>
+<nav>
+  <button class="active" data-tab="overview">개요</button>
+  <button data-tab="profiles">상대 프로필</button>
+  <button data-tab="responses">응답 분포</button>
+  <button data-tab="events">게임 이벤트</button>
+  <button data-tab="logs">로그</button>
+</nav>
+
+<main>
+  <section id="tab-overview" class="active">
+    <h2>상태</h2>
+    <div class="cards" id="overview-cards"></div>
+    <h2>최근 내 결정 (핸드 · 사이즈 · 베팅)</h2>
+    <div id="overview-decisions"></div>
+    <h2>원본 로그 이벤트</h2>
+    <pre class="log" id="overview-events"></pre>
+  </section>
+
+  <section id="tab-profiles">
+    <h2>상대 프로필 (VPIP / PFR / AF · 4-class)</h2>
+    <div id="profiles-body"></div>
+  </section>
+
+  <section id="tab-responses">
+    <h2>Dirichlet 응답 분포 (상대 × phase)</h2>
+    <div id="responses-body"></div>
+  </section>
+
+  <section id="tab-events">
+    <h2>게임 이벤트 필터</h2>
+    <div class="toolbar">
+      <input id="ev-filter" placeholder="필터 (예: hand_start, allin, 3bet)">
+      <button id="ev-refresh">새로고침</button>
+    </div>
+    <pre class="log" id="events-body"></pre>
+  </section>
+
+  <section id="tab-logs">
+    <h2>원본 로그 tail</h2>
+    <div class="toolbar">
+      <input id="log-n" type="number" min="50" max="5000" value="500" style="width:100px">
+      <button id="log-refresh">새로고침</button>
+      <span id="log-path" style="color:var(--fg-dim); margin-left:12px;"></span>
+    </div>
+    <pre class="log" id="logs-body"></pre>
+  </section>
+</main>
+
+<footer>자동 새로고침 3s · <a href="/api/status" style="color:var(--accent)">/api/status</a> · <a href="/api/profiles" style="color:var(--accent)">/api/profiles</a> · <a href="/api/responses" style="color:var(--accent)">/api/responses</a></footer>
+
+<script>
+async function startBot() {
+  const btn = document.getElementById('btn-start');
+  const mode = document.getElementById('sel-mode').value;
+  btn.disabled = true;
+  btn.dataset.busy = '1';
+  btn.textContent = '시작 중…';
+  try {
+    const r = await fetch('/api/bot/start', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({mode}),
+    });
+    const data = await r.json();
+    if (data.ok) {
+      btn.textContent = `✓ pid=${data.pid}`;
+      setTimeout(() => { btn.dataset.busy = ''; refreshOverview(); }, 1500);
+    } else {
+      btn.textContent = `✗ ${data.reason}`;
+      btn.style.background = '#5a3b2b';
+      setTimeout(() => {
+        btn.dataset.busy = '';
+        refreshOverview();
+      }, 3000);
+    }
+  } catch (e) {
+    btn.textContent = '실패: ' + e.message;
+    btn.dataset.busy = '';
+    btn.disabled = false;
+  }
+}
+
+async function stopBot() {
+  if (!confirm('봇 프로세스를 종료하시겠습니까?')) return;
+  const btn = document.getElementById('btn-stop');
+  btn.disabled = true;
+  btn.dataset.busy = '1';
+  btn.textContent = '종료 중…';
+  try {
+    const r = await fetch('/api/bot/stop', {method: 'POST'});
+    const data = await r.json();
+    if (data.ok) {
+      const summary = (data.killed || []).map(k => `${k.pid}/${k.method}`).join(', ');
+      btn.textContent = `✓ 종료 (${summary})`;
+    } else {
+      btn.textContent = `✗ ${data.reason}`;
+    }
+    setTimeout(() => { btn.dataset.busy = ''; refreshOverview(); }, 1500);
+  } catch (e) {
+    btn.textContent = '실패: ' + e.message;
+    btn.dataset.busy = '';
+    btn.disabled = false;
+  }
+}
+
+function syncBotButtons(running) {
+  const btnStart = document.getElementById('btn-start');
+  const btnStop = document.getElementById('btn-stop');
+  if (btnStart && !btnStart.dataset.busy) {
+    btnStart.disabled = running;
+    btnStart.textContent = '봇 시작';
+    btnStart.style.background = '#2b4a39';
+    btnStart.style.color = '#d4ffd4';
+    btnStart.style.borderColor = '#3b8a5b';
+  }
+  if (btnStop && !btnStop.dataset.busy) {
+    btnStop.disabled = !running;
+    btnStop.textContent = '봇 종료';
+    btnStop.style.background = '#5a2b2b';
+    btnStop.style.color = '#ffd4d4';
+    btnStop.style.borderColor = '#8a3b3b';
+  }
+}
+
+// Global error overlay — JS 예외를 페이지 상단에 표시.
+function showError(msg) {
+  const box = document.getElementById('js-error');
+  if (!box) return;
+  box.style.display = 'block';
+  box.textContent = '[JS ERROR] ' + msg;
+  console.error(msg);
+}
+window.addEventListener('error', (e) => showError(`${e.message} at ${e.filename}:${e.lineno}`));
+window.addEventListener('unhandledrejection', (e) => showError(`promise: ${e.reason}`));
+
+const fmt = {
+  pct: v => (v == null) ? '—' : (v * 100).toFixed(1) + '%',
+  num: v => (v == null) ? '—' : Number(v).toFixed(2),
+  int: v => (v == null) ? '—' : Math.round(v),
+};
+
+async function jget(url) {
+  const r = await fetch(url);
+  if (!r.ok) throw new Error(url + ' ' + r.status);
+  return await r.json();
+}
+
+function el(tag, attrs = {}, ...kids) {
+  const e = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs)) {
+    if (k === 'class') e.className = v;
+    else if (k === 'html') e.innerHTML = v;
+    else e.setAttribute(k, v);
+  }
+  for (const k of kids.flat()) {
+    if (k == null) continue;
+    if (k instanceof Node) e.appendChild(k);
+    else e.appendChild(document.createTextNode(String(k)));
+  }
+  return e;
+}
+
+function card(label, value, sub = '') {
+  return el('div', {class: 'card'},
+    el('div', {class: 'label'}, label),
+    el('div', {class: 'value'}, value),
+    el('div', {class: 'sub'}, sub)
+  );
+}
+
+function bar(frac) {
+  const pct = Math.max(0, Math.min(1, frac)) * 100;
+  return `<div class="bar"><span style="width:${pct.toFixed(1)}%"></span></div>`;
+}
+
+async function refreshOverview() {
+  const st = await jget('/api/status');
+  const cardsDiv = document.getElementById('overview-cards');
+  cardsDiv.innerHTML = '';
+  const activeLabel = st.current_room ? `Room ${st.current_room} · Hand ${st.current_hand}` : '방 대기 중';
+  const activeSub = st.last_event_ts
+    ? `최근 결정: ${new Date(st.last_event_ts).toLocaleTimeString()}  (30s 내 ${st.recent_decisions}회)`
+    : '대시보드에서 deploy 필요';
+  cardsDiv.append(
+    card('프로세스', st.running ? 'RUNNING' : 'STOPPED', st.pid ? 'PID=' + st.pid : ''),
+    card('uptime', st.uptime || '—', ''),
+    card('현 게임', activeLabel, activeSub),
+    card('30s 결정 수', st.recent_decisions, '= throughput'),
+    card('프로필 수', st.db_profiles, '상대 누적'),
+    card('응답 행수', st.db_responses, '(상대 × phase)'),
+    card('DB', st.db_path.split('/').pop(), ''),
+    card('로그 파일', (st.log_path || '—').split('/').pop(), ''),
+  );
+
+  // 헤더
+  document.getElementById('dot-run').className = 'dot ' + (st.running ? 'ok' : 'err');
+  document.getElementById('txt-run').textContent = st.running ? 'RUNNING' : 'STOPPED';
+  document.getElementById('txt-pid').textContent = st.pid ? 'pid=' + st.pid : '';
+  document.getElementById('txt-uptime').textContent = st.uptime ? 'up=' + st.uptime : '';
+  document.getElementById('txt-refresh').textContent = new Date().toLocaleTimeString();
+  syncBotButtons(!!st.running);
+
+  // 최근 내 결정 (hole 카드 + 사이즈)
+  await refreshDecisions();
+
+  // 원본 이벤트
+  const ev = await jget('/api/events?n=40');
+  const evBox = document.getElementById('overview-events');
+  evBox.innerHTML = '';
+  if (!ev.events || ev.events.length === 0) {
+    evBox.innerHTML = '<span style="color:var(--fg-dim)">게임 이벤트 없음</span>';
+  } else {
+    for (const e of ev.events) {
+      const cls = 'ev-' + (e.level || 'INFO');
+      const line = document.createElement('div');
+      line.className = cls;
+      line.textContent = `${e.ts} ${e.level}  ${e.msg}`;
+      evBox.appendChild(line);
+    }
+    evBox.scrollTop = evBox.scrollHeight;
+  }
+}
+
+function renderCards(cards) {
+  if (!cards || cards.length === 0) return '<span style="color:var(--fg-dim)">—</span>';
+  return cards.map(c => {
+    if (!c || c.length < 2) return c;
+    const rank = c.slice(0, -1);
+    const suit = c.slice(-1).toLowerCase();
+    const symbol = {s: '♠', c: '♣', h: '♥', d: '♦'}[suit] || suit;
+    return `<span class="card-chip ${suit}">${rank}${symbol}</span>`;
+  }).join('');
+}
+
+function sizingRatio(d) {
+  if (d.action !== 'raise' && d.action !== 'allin') return '—';
+  const amt = d.amount ?? d.my_stack;
+  if (!d.pot) return `${amt}`;
+  const ratio = ((amt - (d.to_call || 0)) / d.pot * 100);
+  return `${amt} (${ratio.toFixed(0)}%pot)`;
+}
+
+async function refreshDecisions() {
+  const data = await jget('/api/recent_decisions?n=20');
+  const body = document.getElementById('overview-decisions');
+  body.innerHTML = '';
+  const rows = data.decisions || [];
+  if (rows.length === 0) {
+    body.innerHTML = '<div class="empty">결정 없음 — 게임 시작 대기 중</div>';
+    return;
+  }
+  const t = el('table');
+  t.innerHTML = `
+    <thead><tr>
+      <th><span class="tip" data-tip="결정 시각 (UTC).">시각</span></th>
+      <th><span class="tip" data-tip="방 번호 / 핸드 번호.">방·핸드</span></th>
+      <th><span class="tip" data-tip="베팅 라운드. preflop/flop/turn/river.">phase</span></th>
+      <th><span class="tip" data-tip="내 홀 카드 (2장).">내 패</span></th>
+      <th><span class="tip" data-tip="커뮤니티 카드 (플롭/턴/리버).">보드</span></th>
+      <th class="num"><span class="tip" data-tip="현재 팟 크기.">pot</span></th>
+      <th class="num"><span class="tip" data-tip="콜하려면 내야 하는 금액.">to_call</span></th>
+      <th class="num"><span class="tip" data-tip="내 남은 스택.">stack</span></th>
+      <th><span class="tip" data-tip="내가 선택한 액션 + 사이즈 (pot 대비 %).">결정</span></th>
+    </tr></thead>`;
+  const tb = document.createElement('tbody');
+  for (let i = rows.length - 1; i >= 0; i--) {
+    const d = rows[i];
+    const ts = d.decision_ts ? new Date(d.decision_ts).toLocaleTimeString() : '';
+    const act = (d.action || '').toLowerCase();
+    const sizing = sizingRatio(d);
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${ts}</td>
+      <td>${d.room_id}·#${d.hand_number}</td>
+      <td>${d.phase}</td>
+      <td class="cards-cell">${renderCards(d.hole)}</td>
+      <td class="cards-cell">${renderCards(d.community)}</td>
+      <td class="num">${d.pot ?? 0}</td>
+      <td class="num">${d.to_call ?? 0}</td>
+      <td class="num">${d.my_stack ?? 0}</td>
+      <td><span class="act-badge act-${act}">${act.toUpperCase()}</span>
+          <span style="color:var(--fg-dim); font-size:11px; margin-left:6px">${sizing}</span></td>`;
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb);
+  body.appendChild(t);
+}
+
+async function refreshProfiles() {
+  const rows = await jget('/api/profiles');
+  const body = document.getElementById('profiles-body');
+  body.innerHTML = '';
+  if (!rows || rows.length === 0) {
+    body.innerHTML = '<div class="empty">프로필 없음</div>';
+    return;
+  }
+  const t = el('table');
+  t.innerHTML = `
+    <thead><tr>
+      <th><span class="tip" data-tip="상대 봇 이름. BOT_GUIDE §1.1 — 서버가 발급하는 고정·영속 키로, 시즌 경계를 넘어 동일합니다.">이름</span></th>
+      <th class="num"><span class="tip" data-tip="관측한 총 핸드 수. hand_result 이벤트 당 +1.">hands</span></th>
+      <th><span class="tip" data-tip="Voluntarily Put $ In Pot\n프리플롭에 자발적으로 돈을 넣은 핸드 비율 (call·raise·allin). 블라인드 자동 투입은 제외.\n\n기준 (HU·통상):\n  · 8~18%  : 매우 타이트 (NIT)\n  · 18~27% : 균형 (TAG)\n  · 27%+   : 루즈 (LAG/Fish)">VPIP</span></th>
+      <th><span class="tip" data-tip="Preflop Raise\n프리플롭에 raise 로 참여한 핸드 비율. VPIP 에 포함된 집합.\n\n해석:\n  · PFR / VPIP 비 ≥ 0.7 → 공격형\n  · PFR / VPIP 비 ≤ 0.4 → 수동형 (Fish)">PFR</span></th>
+      <th class="num"><span class="tip" data-tip="Aggression Factor = (bet + raise) / call\n\n기준:\n  · AF < 1  : 수동 (콜링 스테이션)\n  · AF 1~2  : 균형\n  · AF > 2  : 공격\n\n주의: passive 표본이 희소할 때 과대 평가될 수 있습니다.">AF</span></th>
+      <th><span class="tip" data-tip="4-class hard assignment (NIT/TAG/LAG/Fish)\n\nVPIP × log(AF) 평면에서 centroid 거리 → softmax argmax.\n\n  · NIT  : 타이트+수동 (top 10% 만 플레이)\n  · TAG  : 타이트+공격 (value 중심)\n  · LAG  : 루즈+공격 (자주 3bet·c-bet)\n  · Fish : 루즈+수동 (콜링 스테이션)\n\nhands < 20 → uniform(0.25).">class</span></th>
+      <th><span class="tip" data-tip="4-class soft 확률 분포. temperature=0.05 softmax.\n경계선 관측은 soft 확률로 class prior 를 섞어 사용합니다 (shrinkage 입력).">분포</span></th>
+    </tr></thead>`;
+  const tb = document.createElement('tbody');
+  for (const r of rows) {
+    const tr = document.createElement('tr');
+    const softHTML = ['NIT','TAG','LAG','Fish']
+      .map(c => `${c}:${(r.class_soft[c]*100).toFixed(0)}%`).join(' ');
+    const classTip = {
+      NIT:  '타이트+수동 — top 10% 만 참여, 3bet 에 잘 폴드. 블러핑 거의 안 함.',
+      TAG:  '타이트+공격 — top 20% value 중심, c-bet·3bet 빈도 정상.',
+      LAG:  '루즈+공격 — 넓은 range 로 자주 raise·3bet·c-bet. 블러핑 많음.',
+      Fish: '루즈+수동 — 자주 call 하지만 raise 드묾. 콜링 스테이션 유형.',
+      unknown: 'n_hands 부족 (< 20) 또는 관측 이상. uniform 확률 가정.',
+    }[r.class_hard] || '';
+    tr.innerHTML = `
+      <td><b>${r.name}</b></td>
+      <td class="num">${fmt.int(r.hands_seen)}</td>
+      <td title="alpha / (alpha+beta) = VPIP rate">${bar(r.vpip)}${fmt.pct(r.vpip)}</td>
+      <td title="alpha / (alpha+beta) = PFR rate">${bar(r.pfr)}${fmt.pct(r.pfr)}</td>
+      <td class="num" title="aggressive=${r.n_aggressive}, passive=${r.n_passive}">${fmt.num(r.af)}</td>
+      <td><span class="badge ${r.class_hard} tip" data-tip="${classTip}">${r.class_hard}</span></td>
+      <td style="color:var(--fg-dim); font-size:11px" title="soft assignment — sum=1.0">${softHTML}</td>`;
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb);
+  body.appendChild(t);
+}
+
+async function refreshResponses() {
+  const rows = await jget('/api/responses');
+  const body = document.getElementById('responses-body');
+  body.innerHTML = '';
+  if (!rows || rows.length === 0) {
+    body.innerHTML = '<div class="empty">응답 데이터 없음</div>';
+    return;
+  }
+  const t = el('table');
+  t.innerHTML = `
+    <thead><tr>
+      <th><span class="tip" data-tip="상대 봇 이름.">상대</span></th>
+      <th><span class="tip" data-tip="베팅 라운드.\n  · preflop : 홀 카드만 있는 상태\n  · flop    : 커뮤니티 3장\n  · turn    : 4장\n  · river   : 5장\n\nphase 별로 상대 반응이 달라 따로 집계합니다.">phase</span></th>
+      <th class="num"><span class="tip" data-tip="Dirichlet α_fold\n해당 상황에서 상대가 fold 한 횟수 + baseline prior(1).\nposterior mean ≈ α_fold / Σα.">α_fold</span></th>
+      <th class="num"><span class="tip" data-tip="Dirichlet α_call\n해당 상황에서 상대가 call (또는 check) 한 횟수 + baseline prior(1).">α_call</span></th>
+      <th class="num"><span class="tip" data-tip="Dirichlet α_raise\n해당 상황에서 상대가 raise (또는 allin 공격적 전환) 한 횟수 + baseline prior(1).">α_raise</span></th>
+      <th><span class="tip" data-tip="posterior 평균 fold 확률 = α_fold / Σα.\nEV tree 의 ev_raise 경로에서 상대가 fold 할 확률로 사용.">P(fold)</span></th>
+      <th><span class="tip" data-tip="posterior 평균 call 확률 = α_call / Σα.">P(call)</span></th>
+      <th><span class="tip" data-tip="posterior 평균 raise 확률 = α_raise / Σα.\n상대가 re-raise 해올 빈도 — 우리 블러핑 EV 의 리스크 항.">P(raise)</span></th>
+      <th class="num"><span class="tip" data-tip="순수 관측 수 (baseline 3 제외).\nn 이 클수록 posterior 가 baseline 에서 개인 분포로 수렴.\n적을 때는 class prior 로 shrinkage (H.1 3-layer).">n</span></th>
+    </tr></thead>`;
+  const tb = document.createElement('tbody');
+  for (const r of rows) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td><b>${r.name}</b></td>
+      <td>${r.phase}</td>
+      <td class="num">${r.alpha_fold}</td>
+      <td class="num">${r.alpha_call}</td>
+      <td class="num">${r.alpha_raise}</td>
+      <td>${bar(r.p_fold)}${fmt.pct(r.p_fold)}</td>
+      <td>${bar(r.p_call)}${fmt.pct(r.p_call)}</td>
+      <td>${bar(r.p_raise)}${fmt.pct(r.p_raise)}</td>
+      <td class="num">${r.n_obs}</td>`;
+    tb.appendChild(tr);
+  }
+  t.appendChild(tb);
+  body.appendChild(t);
+}
+
+async function refreshEvents() {
+  const filter = document.getElementById('ev-filter').value.toLowerCase().trim();
+  const ev = await jget('/api/events?n=500');
+  const box = document.getElementById('events-body');
+  box.innerHTML = '';
+  if (!ev.events || ev.events.length === 0) {
+    box.innerHTML = '<span style="color:var(--fg-dim)">게임 이벤트 없음</span>';
+    return;
+  }
+  for (const e of ev.events) {
+    if (filter && !(e.msg.toLowerCase().includes(filter) || e.logger.toLowerCase().includes(filter))) continue;
+    const line = document.createElement('div');
+    line.className = 'ev-' + (e.level || 'INFO');
+    line.textContent = `${e.ts} ${e.level}  ${e.msg}`;
+    box.appendChild(line);
+  }
+  box.scrollTop = box.scrollHeight;
+}
+
+async function refreshLogs() {
+  const n = document.getElementById('log-n').value || 500;
+  const data = await jget('/api/logs?n=' + n);
+  document.getElementById('log-path').textContent = data.path || '';
+  const box = document.getElementById('logs-body');
+  box.textContent = (data.lines || []).join('\n');
+  box.scrollTop = box.scrollHeight;
+}
+
+const TAB_REFRESHERS = {
+  overview: refreshOverview,
+  profiles: refreshProfiles,
+  responses: refreshResponses,
+  events: refreshEvents,
+  logs: refreshLogs,
+};
+
+let currentTab = 'overview';
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.tab === tab));
+  document.querySelectorAll('main section').forEach(s => s.classList.toggle('active', s.id === 'tab-' + tab));
+  TAB_REFRESHERS[tab]().catch(err => showError(tab + ': ' + (err.message || err)));
+}
+
+document.querySelectorAll('nav button').forEach(b => {
+  b.addEventListener('click', () => switchTab(b.dataset.tab));
+});
+document.getElementById('ev-refresh').addEventListener('click', refreshEvents);
+document.getElementById('log-refresh').addEventListener('click', refreshLogs);
+document.getElementById('ev-filter').addEventListener('input', () => { refreshEvents().catch(()=>{}); });
+
+// 3s polling — 오버뷰는 항상, 현재 탭도 함께
+setInterval(() => {
+  refreshOverview().catch(e => showError('refreshOverview: ' + (e.message || e)));
+  if (currentTab !== 'overview') {
+    TAB_REFRESHERS[currentTab]().catch(e => showError(currentTab + ': ' + (e.message || e)));
+  }
+}, 3000);
+
+// 초기 로드
+refreshOverview().catch(e => showError('init refreshOverview: ' + (e.message || e)));
+switchTab('overview');
+</script>
+</body>
+</html>

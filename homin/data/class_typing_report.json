@@ -1,0 +1,359 @@
+{
+  "min_hands_threshold": 500,
+  "total_players_aggregated": 15,
+  "cluster_result": {
+    "n_players_clustered": 15,
+    "min_hands": 500,
+    "kmeans": {
+      "silhouette": 0.3499688434039188,
+      "centroids": [
+        {
+          "centroid": {
+            "VPIP": 0.7988333333333333,
+            "PFR": 0.5443444444444444,
+            "AF": 1.9009763723069297
+          },
+          "class": "LAG"
+        },
+        {
+          "centroid": {
+            "VPIP": 0.7505,
+            "PFR": 0.5552999999999999,
+            "AF": 3.3576261909438716
+          },
+          "class": "LAG"
+        },
+        {
+          "centroid": {
+            "VPIP": 0.7004333333333334,
+            "PFR": 0.4134333333333333,
+            "AF": 0.9748119546279855
+          },
+          "class": "Fish"
+        },
+        {
+          "centroid": {
+            "VPIP": 0.8354,
+            "PFR": 0.7233,
+            "AF": 6.585700000000002
+          },
+          "class": "LAG"
+        }
+      ]
+    },
+    "gmm": {
+      "silhouette": 0.3499688434039188,
+      "centroids": [
+        {
+          "centroid": {
+            "VPIP": 0.798741515750466,
+            "PFR": 0.544408085042492,
+            "AF": 1.9028411476392297
+          },
+          "class": "LAG",
+          "covariance_trace": 0.029091692305656502
+        },
+        {
+          "centroid": {
+            "VPIP": 0.7505060487352944,
+            "PFR": 0.5553073484579298,
+            "AF": 3.3578641496191093
+          },
+          "class": "LAG",
+          "covariance_trace": 0.01259465802934735
+        },
+        {
+          "centroid": {
+            "VPIP": 0.7021679923750601,
+            "PFR": 0.4152200363294321,
+            "AF": 0.9827476744988057
+          },
+          "class": "Fish",
+          "covariance_trace": 0.04280603058499719
+        },
+        {
+          "centroid": {
+            "VPIP": 0.8353999999999981,
+            "PFR": 0.7232999999999985,
+            "AF": 6.585699999999968
+          },
+          "class": "LAG",
+          "covariance_trace": 0.00030000000000000003
+        }
+      ],
+      "boundary_ratio_lt_0.7": 0.0
+    },
+    "players": [
+      {
+        "name": "Claude Opus 4.6",
+        "hands": 274800,
+        "VPIP": 0.7983,
+        "PFR": 0.5224,
+        "AF": 1.6112,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.9987766867644065,
+          "cluster_1": 3.4562510100822e-30,
+          "cluster_2": 0.0012233132355930578,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9987766867644065
+      },
+      {
+        "name": "Claude Opus 4.5",
+        "hands": 279800,
+        "VPIP": 0.7864,
+        "PFR": 0.5051,
+        "AF": 1.4692,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.9538025809779007,
+          "cluster_1": 3.1632464105834372e-27,
+          "cluster_2": 0.046197419022099104,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9538025809779007
+      },
+      {
+        "name": "Claude Sonnet 4.5",
+        "hands": 280000,
+        "VPIP": 0.8209,
+        "PFR": 0.5291,
+        "AF": 2.0788,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 1.0,
+          "cluster_1": 2.1852183762917435e-27,
+          "cluster_2": 1.8802901074311924e-18,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 1.0
+      },
+      {
+        "name": "Claude Sonnet 4.6",
+        "hands": 272700,
+        "VPIP": 0.8728,
+        "PFR": 0.6239,
+        "AF": 2.2565,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.9999998649949051,
+          "cluster_1": 7.648857594593125e-76,
+          "cluster_2": 1.3500509486800136e-07,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9999998649949051
+      },
+      {
+        "name": "DeepSeek V3.2",
+        "hands": 279800,
+        "VPIP": 0.7384,
+        "PFR": 0.5406,
+        "AF": 2.9067,
+        "km_cluster": 1,
+        "km_class": "LAG",
+        "gmm_cluster": 1,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.000997406553650612,
+          "cluster_1": 0.999002593446349,
+          "cluster_2": 3.4253406265234025e-48,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.999002593446349
+      },
+      {
+        "name": "GPT-5.2",
+        "hands": 280000,
+        "VPIP": 0.8893,
+        "PFR": 0.6242,
+        "AF": 1.8438,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.9930313801838679,
+          "cluster_1": 3.3493869248626665e-109,
+          "cluster_2": 0.0069686198161318744,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9930313801838679
+      },
+      {
+        "name": "GPT-5.4",
+        "hands": 267300,
+        "VPIP": 0.8973,
+        "PFR": 0.4997,
+        "AF": 1.0913,
+        "km_cluster": 2,
+        "km_class": "Fish",
+        "gmm_cluster": 2,
+        "gmm_class": "Fish",
+        "gmm_probs": {
+          "cluster_0": 0.0010748642698325346,
+          "cluster_1": 2.7141365570153247e-123,
+          "cluster_2": 0.9989251357301676,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9989251357301676
+      },
+      {
+        "name": "GPT-5.4 mini",
+        "hands": 269000,
+        "VPIP": 0.8788,
+        "PFR": 0.5701,
+        "AF": 1.7921,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.9998721477001647,
+          "cluster_1": 1.2300630822489946e-81,
+          "cluster_2": 0.00012785229983479517,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9998721477001647
+      },
+      {
+        "name": "GPT-5 mini",
+        "hands": 280000,
+        "VPIP": 0.8384,
+        "PFR": 0.5774,
+        "AF": 1.8628,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.9997577963004399,
+          "cluster_1": 4.315507010036657e-54,
+          "cluster_2": 0.00024220369956013868,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9997577963004399
+      },
+      {
+        "name": "Gemini 3.1 Pro Preview",
+        "hands": 275800,
+        "VPIP": 0.4854,
+        "PFR": 0.3487,
+        "AF": 1.9288,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 1.0,
+          "cluster_1": 9.650858046725622e-155,
+          "cluster_2": 4.508707594270054e-41,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 1.0
+      },
+      {
+        "name": "Gemini 3 Flash Preview",
+        "hands": 280000,
+        "VPIP": 0.6609,
+        "PFR": 0.4409,
+        "AF": 1.1862,
+        "km_cluster": 2,
+        "km_class": "Fish",
+        "gmm_cluster": 2,
+        "gmm_class": "Fish",
+        "gmm_probs": {
+          "cluster_0": 0.0056197293331116715,
+          "cluster_1": 2.0170301329062656e-09,
+          "cluster_2": 0.9943802686498584,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9943802686498584
+      },
+      {
+        "name": "Gemini 3 Pro Preview",
+        "hands": 239600,
+        "VPIP": 0.5431,
+        "PFR": 0.2997,
+        "AF": 0.6845,
+        "km_cluster": 2,
+        "km_class": "Fish",
+        "gmm_cluster": 2,
+        "gmm_class": "Fish",
+        "gmm_probs": {
+          "cluster_0": 3.007901622084277e-08,
+          "cluster_1": 6.022891616827365e-73,
+          "cluster_2": 0.9999999699209838,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9999999699209838
+      },
+      {
+        "name": "Grok 4.1 Fast Reasoning",
+        "hands": 280000,
+        "VPIP": 0.7626,
+        "PFR": 0.57,
+        "AF": 3.8606,
+        "km_cluster": 1,
+        "km_class": "LAG",
+        "gmm_cluster": 1,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 4.493147596002863e-09,
+          "cluster_1": 0.9999999955068528,
+          "cluster_2": 9.562156713314313e-93,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9999999955068528
+      },
+      {
+        "name": "Grok 4",
+        "hands": 280000,
+        "VPIP": 0.8354,
+        "PFR": 0.7233,
+        "AF": 6.5857,
+        "km_cluster": 3,
+        "km_class": "LAG",
+        "gmm_cluster": 3,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 3.2863353519059687e-25,
+          "cluster_1": 5.656413095448415e-27,
+          "cluster_2": 4.415980291112911e-148,
+          "cluster_3": 1.0
+        },
+        "gmm_soft_max_prob": 1.0
+      },
+      {
+        "name": "o3",
+        "hands": 280000,
+        "VPIP": 0.8192,
+        "PFR": 0.5982,
+        "AF": 2.3811,
+        "km_cluster": 0,
+        "km_class": "LAG",
+        "gmm_cluster": 0,
+        "gmm_class": "LAG",
+        "gmm_probs": {
+          "cluster_0": 0.9999999999978089,
+          "cluster_1": 1.0369770841009991e-32,
+          "cluster_2": 2.1913151724828107e-12,
+          "cluster_3": 0.0
+        },
+        "gmm_soft_max_prob": 0.9999999999978089
+      }
+    ]
+  }
+}

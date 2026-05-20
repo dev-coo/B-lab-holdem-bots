@@ -1,0 +1,91 @@
+# Population prior (초안, Draft).
+# 근거: research/dataset_analysis/eda_01_distributions.md §6 (HU 2.06M) × transfer_coefficients v0.1.
+# BOT_GUIDE §5.3 action_request action_history 의 서버 실시간 갱신 대상.
+
+version: 0.1
+stage: draft
+source: "eda_01_distributions.md v0.1 (HU 2.06M) + transfer_coefficients.yaml v0.1"
+
+# === HU 관측값 원본 (참조. 서버 적용 금지) ===
+hu_observed:
+  THREE_BET:         {rate: 0.234, tries: 1781721, alpha: 417118, beta: 1364605}
+  FOLD_TO_THREE_BET: {rate: 0.497, tries:  417117, alpha: 207392, beta:  209727}
+  CBET:              {rate: 0.772, tries: 1126024, alpha: 869194, beta:  256832}
+  FOLD_TO_CBET:      {rate: 0.343, tries:  869193, alpha: 298205, beta:  570990}
+  BARREL_TURN:       {rate: 0.598, tries:  437664, alpha: 261614, beta:  176052}
+  BARREL_RIVER:      {rate: 0.476, tries:  138828, alpha:  66044, beta:   72786}
+  # VPIP/PFR/AF 는 player_stats.csv 및 eda_02_clusters.md 참조
+
+# === 9max 전이 후 (Beta 재스케일: effective sample size ≈ 100) ===
+# 과도한 HU confidence 가 개인 posterior 갱신을 덮어쓰지 않도록 ESS=100 rescale
+server_prior_9max:
+  THREE_BET:         {rate: 0.140, alpha: 14, beta: 86}
+  FOLD_TO_THREE_BET: {rate: 0.497, alpha: 50, beta: 50}
+  CBET:              {rate: 0.710, alpha: 71, beta: 29}
+  FOLD_TO_CBET:      {rate: 0.326, alpha: 33, beta: 67}
+  BARREL_TURN:       {rate: 0.538, alpha: 54, beta: 46}
+  BARREL_RIVER:      {rate: 0.405, alpha: 41, beta: 59}
+  BLUFF_AT_SHOWDOWN: {rate: 0.200, alpha: 20, beta: 80}   # eda_05 river 추정, HU×0.75
+  CHECK_RAISE:       {rate: 0.080, alpha:  8, beta: 92}   # 문헌값 (HU 데이터 미집계)
+
+# === 6max 전이 후 ===
+server_prior_6max:
+  THREE_BET:         {rate: 0.176, alpha: 18, beta: 82}
+  FOLD_TO_THREE_BET: {rate: 0.497, alpha: 50, beta: 50}
+  CBET:              {rate: 0.733, alpha: 73, beta: 27}
+  FOLD_TO_CBET:      {rate: 0.336, alpha: 34, beta: 66}
+  BARREL_TURN:       {rate: 0.568, alpha: 57, beta: 43}
+  BARREL_RIVER:      {rate: 0.438, alpha: 44, beta: 56}
+  BLUFF_AT_SHOWDOWN: {rate: 0.225, alpha: 23, beta: 77}
+  CHECK_RAISE:       {rate: 0.090, alpha:  9, beta: 91}
+
+# === 4max 전이 후 ===
+server_prior_4max:
+  THREE_BET:         {rate: 0.199, alpha: 20, beta: 80}
+  FOLD_TO_THREE_BET: {rate: 0.497, alpha: 50, beta: 50}
+  CBET:              {rate: 0.756, alpha: 76, beta: 24}
+  FOLD_TO_CBET:      {rate: 0.346, alpha: 35, beta: 65}
+  BARREL_TURN:       {rate: 0.586, alpha: 59, beta: 41}
+  BARREL_RIVER:      {rate: 0.462, alpha: 46, beta: 54}
+  BLUFF_AT_SHOWDOWN: {rate: 0.245, alpha: 25, beta: 75}
+  CHECK_RAISE:       {rate: 0.095, alpha: 10, beta: 90}
+
+# === 포지션 × class 기본값 (VPIP/PFR 은 별도 파일 참조) ===
+# 포지션별 VPIP 는 문헌값 기반 (HU 데이터로는 EP/MP/LP 분리 불가)
+position_vpip_9max:
+  EP:  {alpha: 12, beta: 88}       # VPIP ≈ 12%
+  MP:  {alpha: 18, beta: 82}       # 18%
+  CO:  {alpha: 26, beta: 74}       # 26%
+  BTN: {alpha: 38, beta: 62}       # 38%
+  SB:  {alpha: 30, beta: 70}       # 30% (steal 기회)
+  BB:  {alpha: 22, beta: 78}       # 22% (defend)
+
+# === Shrinkage hyperparameters ===
+# final_prior = w_personal × posterior + w_class × class_prior + w_pop × population
+# τ_class = 8, τ_pop = 40 (§H.1 Empirical Bayes)
+shrinkage:
+  tau_class:      8
+  tau_population: 40
+
+# === 적용 규칙 ===
+application:
+  default_server_prior_set: server_prior_9max
+  # 게임 시작 시 hand_start 이벤트로 n_players 확인하여 자동 선택
+  select_by_players:
+    2: server_prior_6max    # HU 가 없으므로 6max 사용 (또는 별도)
+    3: server_prior_4max
+    4: server_prior_4max
+    5: server_prior_6max
+    6: server_prior_6max
+    7: server_prior_9max
+    8: server_prior_9max
+    9: server_prior_9max
+
+# === 검증 요구 ===
+validation_targets:
+  # Bootstrap self-play 후 각 지표가 ±15% 이내로 HU 전이 추정과 일치해야
+  # 일치하지 않으면 transfer_coefficients.yaml 의 계수 수정 + 본 파일 v0.2
+  bootstrap_check:
+    - "CBET 9max observed in bootstrap must be 0.710 ± 0.11"
+    - "BARREL_TURN must be 0.538 ± 0.08"
+    - "FOLD_TO_CBET must be 0.326 ± 0.05"

@@ -1,0 +1,99 @@
+{
+  "mode": "multi",
+  "schedule": {
+    "starting_stack": 300,
+    "n_levels": 20
+  },
+  "config": {
+    "mode": "multi",
+    "per_pair": 10,
+    "tourns": 200,
+    "max_hands": 500,
+    "seed": 1,
+    "output": "/Users/ihomin/Documents/blab/holdem-agent/data/baselines/p4_safe_200.json",
+    "include_bot": true,
+    "bot_mode": "safe",
+    "final_table_size": 4
+  },
+  "totals": [
+    {
+      "name": "bot-safe",
+      "wins": 59,
+      "first_place_rate": 29.5,
+      "itm": 74,
+      "itm_pct": 37.0,
+      "avg_rank": 2.085,
+      "avg_pts": 3.915,
+      "bubble_survival_rate": 75.5,
+      "mean_chips_at_final_table": 440.0066225165563
+    },
+    {
+      "name": "lag",
+      "wins": 47,
+      "first_place_rate": 23.5,
+      "itm": 70,
+      "itm_pct": 35.0,
+      "avg_rank": 2.66,
+      "avg_pts": 3.34,
+      "bubble_survival_rate": 56.00000000000001,
+      "mean_chips_at_final_table": 579.6517857142857
+    },
+    {
+      "name": "nashjam",
+      "wins": 40,
+      "first_place_rate": 20.0,
+      "itm": 85,
+      "itm_pct": 42.5,
+      "avg_rank": 2.265,
+      "avg_pts": 3.735,
+      "bubble_survival_rate": 73.5,
+      "mean_chips_at_final_table": 607.734693877551
+    },
+    {
+      "name": "random",
+      "wins": 27,
+      "first_place_rate": 13.5,
+      "itm": 31,
+      "itm_pct": 15.5,
+      "avg_rank": 4.16,
+      "avg_pts": 1.84,
+      "bubble_survival_rate": 23.5,
+      "mean_chips_at_final_table": 675.8723404255319
+    },
+    {
+      "name": "tag",
+      "wins": 17,
+      "first_place_rate": 8.5,
+      "itm": 77,
+      "itm_pct": 38.5,
+      "avg_rank": 2.32,
+      "avg_pts": 3.68,
+      "bubble_survival_rate": 77.5,
+      "mean_chips_at_final_table": 492.2903225806452
+    },
+    {
+      "name": "callstation",
+      "wins": 7,
+      "first_place_rate": 3.5000000000000004,
+      "itm": 10,
+      "itm_pct": 5.0,
+      "avg_rank": 5.12,
+      "avg_pts": 0.88,
+      "bubble_survival_rate": 11.0,
+      "mean_chips_at_final_table": 850.0454545454545
+    },
+    {
+      "name": "nitrock",
+      "wins": 3,
+      "first_place_rate": 1.5,
+      "itm": 53,
+      "itm_pct": 26.5,
+      "avg_rank": 2.39,
+      "avg_pts": 3.61,
+      "bubble_survival_rate": 79.5,
+      "mean_chips_at_final_table": 455.64150943396226
+    }
+  ],
+  "avg_hands": 98.675,
+  "avg_final_level": 11.99
+}

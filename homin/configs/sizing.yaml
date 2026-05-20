@@ -1,0 +1,54 @@
+# Sizing grid 3-tier (conservative / balanced / exploit).
+# 근거: research/dataset_analysis/eda_04_sizing.md §4 (Kaggle HU 2.06M).
+# BOT_GUIDE §6.2 raise = round total 해석 하에 사이즈는 pot_before 대비 비율.
+
+version: 0.1
+stage: draft
+source: "eda_04_sizing.md v0.1 (2.06M hands, 4.3M decisions)"
+
+# n_effective = n_personal + 0.3 × n_class + 0.05 × n_population
+# conservative_threshold: n_effective < 30
+# balanced_threshold:     30 ≤ n < 150
+# exploit_threshold:      n ≥ 150
+
+conservative_grid:
+  # exploitable 최소화. 큰 사이즈/오버벳 봉쇄.
+  value_bet:   [0.33, 0.50]
+  bluff_bet:   [0.33]
+  protection:  [0.50, 0.67]
+  raise_open_bb: [2.2, 2.5]
+  three_bet_multiplier: [2.8, 3.0]
+  max_bet_to_pot: 0.67
+  no_allin_unless:
+    - "nash_chart_says_jam"
+    - "eq_ge_0.85"
+    - "stack_lt_5bb"
+    - "forced_commit"
+
+balanced_grid:
+  value_bet:   [0.33, 0.50, 0.67, 1.00]
+  bluff_bet:   [0.33, 0.50]
+  protection:  [0.50, 0.67, 1.00]
+  raise_open_bb: [2.2, 2.5, 3.0]
+  three_bet_multiplier: [2.8, 3.0, 3.5]
+  max_bet_to_pot: 1.00
+
+exploit_grid:
+  value_bet:   [0.33, 0.50, 0.67, 1.00, 1.50]
+  bluff_bet:   [0.50, 1.00]           # polarized
+  protection:  [0.50, 0.67, 1.00]
+  raise_open_bb: [2.2, 2.5, 3.0, 3.5]
+  three_bet_multiplier: [2.8, 3.0, 3.5, 4.0]
+  max_bet_to_pot: 2.00
+
+# 관찰값 (LLM 풀) — 전이 금지. 참조용 보관.
+observed_llm_peaks_raw:
+  - {range: [1.50, 2.00], share: 0.199}
+  - {range: [1.25, 1.50], share: 0.150}
+  - {range: [1.00, 1.25], share: 0.141}
+  - {range: [0.50, 0.60], share: 0.116}
+  - {range: [0.66, 0.75], share: 0.079}
+# LLM overbet share (bet_to_pot ≥ 1.5) ≈ 35% — 인간 풀은 <10% 추정.
+
+# Conservative→Balanced→Exploit 전환은 configs/conservatism_schedule.yaml 에서 관리
+# 이 파일은 각 mode 의 candidate sizing 목록만 공급.

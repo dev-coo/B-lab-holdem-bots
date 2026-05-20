@@ -1,0 +1,81 @@
+# 4-class typing Beta prior (초안, Draft).
+# 근거: research/dataset_analysis/eda_02_clusters.md §6 (HU silhouette=0.35).
+# 주의: HU centroid 는 full-ring 에 직접 적용 금지. 서버 bootstrap 후 재보정 필수.
+# BOT_GUIDE §4 (position), §5.3 (action), §13 참조.
+
+version: 0.1
+stage: draft
+source: "eda_02_clusters.md v0.1 (Kaggle HU 15 LLM centroid, n=15)"
+applies_to_server: false   # HU 관측치. 서버(4~9인) 적용 전 transfer_coefficients 곱 필수.
+
+# HU 관측 centroid (참조용 원본 수치 보관)
+hu_centroids_raw:
+  LAG_standard: {VPIP: 0.80, PFR: 0.54, AF: 1.90, n_players: 11}
+  LAG_hyper:    {VPIP: 0.75, PFR: 0.56, AF: 3.36, n_players: 2}
+  LAG_maniac:   {VPIP: 0.84, PFR: 0.72, AF: 6.59, n_players: 1}
+  Fish_active:  {VPIP: 0.70, PFR: 0.41, AF: 0.97, n_players: 1}
+
+# 서버(full-ring) 적용용 4-class Beta prior (초안).
+# 수치 근거: 전통적 포커 통계 문헌값 + HU 관측치의 질적 구조.
+server_class_priors:
+  NIT:
+    # tight-passive: VPIP<20, AF<1
+    VPIP:              {alpha: 12, beta: 88}
+    PFR:               {alpha: 9,  beta: 91}
+    THREE_BET:         {alpha: 3,  beta: 97}
+    FOLD_TO_THREE_BET: {alpha: 75, beta: 25}
+    CBET:              {alpha: 55, beta: 45}
+    FOLD_TO_CBET:      {alpha: 60, beta: 40}
+    BLUFF_AT_SHOWDOWN: {alpha: 6,  beta: 94}
+    af_target_mean:    0.6
+  TAG:
+    # tight-aggressive: 20≤VPIP<30, AF≥2
+    VPIP:              {alpha: 22, beta: 78}
+    PFR:               {alpha: 18, beta: 82}
+    THREE_BET:         {alpha: 9,  beta: 91}
+    FOLD_TO_THREE_BET: {alpha: 62, beta: 38}
+    CBET:              {alpha: 70, beta: 30}
+    FOLD_TO_CBET:      {alpha: 50, beta: 50}
+    BLUFF_AT_SHOWDOWN: {alpha: 18, beta: 82}
+    af_target_mean:    2.5
+  LAG:
+    # loose-aggressive: 30≤VPIP<45, AF≥2
+    VPIP:              {alpha: 32, beta: 68}
+    PFR:               {alpha: 24, beta: 76}
+    THREE_BET:         {alpha: 14, beta: 86}
+    FOLD_TO_THREE_BET: {alpha: 50, beta: 50}
+    CBET:              {alpha: 75, beta: 25}
+    FOLD_TO_CBET:      {alpha: 45, beta: 55}
+    BLUFF_AT_SHOWDOWN: {alpha: 28, beta: 72}
+    af_target_mean:    3.0
+  Fish:
+    # loose-passive: VPIP≥35, AF<1.5
+    VPIP:              {alpha: 42, beta: 58}
+    PFR:               {alpha: 16, beta: 84}
+    THREE_BET:         {alpha: 4,  beta: 96}
+    FOLD_TO_THREE_BET: {alpha: 40, beta: 60}
+    CBET:              {alpha: 50, beta: 50}
+    FOLD_TO_CBET:      {alpha: 40, beta: 60}
+    BLUFF_AT_SHOWDOWN: {alpha: 10, beta: 90}
+    af_target_mean:    0.9
+
+# 분류 경계 (soft assignment 권장, hard 는 fallback 용)
+boundaries:
+  tight_vpip_max:      0.30
+  loose_vpip_min:      0.45
+  passive_af_max:      1.5
+  aggressive_af_min:   2.0
+  # 경계 내부는 GMM soft probability 기반 혼합
+  soft_assignment:
+    method: gmm_proba
+    min_hands_for_typing: 20      # 최소 관측 수
+    shrink_to_population_if_fewer: true
+
+# Observed-but-unmapped: HU LLM 풀 고유 관측 (참조용)
+hu_population_raw:
+  VPIP_mean:     0.78
+  PFR_mean:      0.53
+  AF_mean:       2.43
+  VPIP_SB_mean:  0.87
+  VPIP_BB_mean:  0.67
+  note: "HU 포지션 수학의 귀결. 4-9way 에서는 EP VPIP ≪ BTN VPIP 의 비대칭이 다시 등장."

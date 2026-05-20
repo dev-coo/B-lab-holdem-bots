@@ -1,0 +1,76 @@
+# Heads-up (HU) 전용 push/fold 차트.
+# 1:1 (alive=2) 단계에서만 사용. 일반 9-max chart 보다 훨씬 넓은 레인지.
+# 근거: HU GTO push/fold equilibrium (Holz, ICMIZER 등 공개 차트 근사).
+#
+# 사용 위치 (decide/policy.py):
+#   stage == HEADS_UP 일 때
+#     - SB(=BTN) 의 first-in jam → hu_jam_ranges
+#     - BB 의 facing-jam call    → hu_call_ranges
+#
+# Hand shorthand 는 simple_push_9max.yaml 와 동일.
+# pos_class 키는 사용하지 않음 — HU 는 2 개 자리 뿐이라 "any" 하나로 충분.
+
+version: 0.1
+stage: draft
+source: "HU chip-EV nash equilibrium 근사 (HoldemResources / ICMIZER 표 보간)."
+
+# SB (=BTN) 가 jam 할 때의 핸드 범위. M 작을수록 넓어짐.
+hu_jam_ranges:
+  # M ≤ 2: any two — 폴드는 거의 -EV.
+  - max_M: 2.0
+    any: "any"
+
+  # 2 < M ≤ 4: ≈ 85% range.
+  - max_M: 4.0
+    any: "22+,A2s+,A2o+,K2s+,K3o+,Q2s+,Q5o+,J3s+,J7o+,T6s+,T8o+,96s+,98o,85s+,87o,75s+,64s+,54s,43s"
+
+  # 4 < M ≤ 6: ≈ 70%.
+  - max_M: 6.0
+    any: "22+,A2s+,A2o+,K2s+,K5o+,Q4s+,Q8o+,J6s+,J9o+,T7s+,T9o,97s+,98o,86s+,76s,65s,54s"
+
+  # 6 < M ≤ 8: ≈ 55%.
+  - max_M: 8.0
+    any: "22+,A2s+,A4o+,K2s+,K8o+,Q6s+,Q9o+,J7s+,JTo,T8s+,98s,87s,76s"
+
+  # 8 < M ≤ 10: ≈ 45%.
+  - max_M: 10.0
+    any: "22+,A2s+,A6o+,K4s+,K9o+,Q8s+,QTo+,J8s+,JTo,T8s+,98s"
+
+  # 10 < M ≤ 13: ≈ 30%.
+  - max_M: 13.0
+    any: "22+,A4s+,A8o+,K7s+,KTo+,Q9s+,QJo,J9s+,T9s"
+
+# P5-3: M > 13 deep stack HU 의 first-in 오픈 (raise) range. jam 이 아닌
+# 일반 raise. HU 에서 BTN(SB) 가 70-80% 핸드를 오픈해도 GTO 근사. 일반 9-max
+# chart fallthrough 를 막아 deep HU 에서도 적극적 raise.
+hu_open_ranges:
+  # 13 < M ≤ 25: ≈ 70%.
+  - max_M: 25.0
+    any: "22+,A2s+,A2o+,K2s+,K5o+,Q4s+,Q8o+,J6s+,J9o+,T7s+,T9o,97s+,98o,86s+,76s,65s,54s"
+
+  # M > 25: ≈ 60%. 깊을수록 약한 핸드 reverse-implied odds 위험 ↑.
+  - max_M: null
+    any: "22+,A2s+,A2o+,K2s+,K7o+,Q5s+,Q9o+,J7s+,JTo,T7s+,T9o,97s+,98o,87s,76s,65s"
+
+# BB 가 SB jam 에 대해 call 할 때의 범위. SB 가 wide 하게 jam 하므로 BB 도
+# 9-max 의 BLIND defend 보다 훨씬 넓게 call.
+hu_call_ranges:
+  # M ≤ 3: ≈ 55%.
+  - max_M: 3.0
+    any: "22+,A2s+,A2o+,K2s+,K7o+,Q4s+,QTo+,J6s+,JTo,T7s+,98s,87s,76s,65s,54s"
+
+  # 3 < M ≤ 6: ≈ 35%.
+  - max_M: 6.0
+    any: "22+,A2s+,A7o+,K6s+,K9o+,Q8s+,QJo,J9s+,T9s"
+
+  # 6 < M ≤ 10: ≈ 22%.
+  - max_M: 10.0
+    any: "33+,A6s+,A9o+,K8s+,KTo+,Q9s+,QJo,JTs"
+
+  # 10 < M ≤ 15: ≈ 12%.
+  - max_M: 15.0
+    any: "55+,A8s+,AJo+,KTs+,KQo,QJs"
+
+  # M > 15: ≈ 8% — premium only.
+  - max_M: null
+    any: "77+,AJs+,AQo+,KQs"

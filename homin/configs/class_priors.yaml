@@ -1,0 +1,65 @@
+version: '0.2'
+stage: draft
+source: eda_02_clusters.md v0.1 (Kaggle HU 15 LLM centroid, n=15) + bootstrap_self_play
+  (ESS=50, blend w_old=0.75, Laplace AF cap=10.0)
+applies_to_server: false
+hu_centroids_raw:
+  LAG_standard: {VPIP: 0.8, PFR: 0.54, AF: 1.9, n_players: 11}
+  LAG_hyper: {VPIP: 0.75, PFR: 0.56, AF: 3.36, n_players: 2}
+  LAG_maniac: {VPIP: 0.84, PFR: 0.72, AF: 6.59, n_players: 1}
+  Fish_active: {VPIP: 0.7, PFR: 0.41, AF: 0.97, n_players: 1}
+server_class_priors:
+  NIT:
+    VPIP: {alpha: 9.7, beta: 77.8}
+    PFR: {alpha: 7.4, beta: 80.1}
+    THREE_BET: {alpha: 3, beta: 97}
+    FOLD_TO_THREE_BET: {alpha: 75, beta: 25}
+    CBET: {alpha: 55, beta: 45}
+    FOLD_TO_CBET: {alpha: 60, beta: 40}
+    BLUFF_AT_SHOWDOWN: {alpha: 6, beta: 94}
+    af_target_mean: 0.6
+  TAG:
+    VPIP: {alpha: 18.1, beta: 69.4}
+    PFR: {alpha: 15.1, beta: 72.4}
+    THREE_BET: {alpha: 9, beta: 91}
+    FOLD_TO_THREE_BET: {alpha: 62, beta: 38}
+    CBET: {alpha: 70, beta: 30}
+    FOLD_TO_CBET: {alpha: 50, beta: 50}
+    BLUFF_AT_SHOWDOWN: {alpha: 18, beta: 82}
+    af_target_mean: 2.5
+  LAG:
+    VPIP: {alpha: 27.2, beta: 60.3}
+    PFR: {alpha: 21.2, beta: 66.3}
+    THREE_BET: {alpha: 14, beta: 86}
+    FOLD_TO_THREE_BET: {alpha: 50, beta: 50}
+    CBET: {alpha: 75, beta: 25}
+    FOLD_TO_CBET: {alpha: 45, beta: 55}
+    BLUFF_AT_SHOWDOWN: {alpha: 28, beta: 72}
+    af_target_mean: 3.0
+  Fish:
+    VPIP: {alpha: 39.4, beta: 48.1}
+    PFR: {alpha: 12.0, beta: 75.5}
+    THREE_BET: {alpha: 4, beta: 96}
+    FOLD_TO_THREE_BET: {alpha: 40, beta: 60}
+    CBET: {alpha: 50, beta: 50}
+    FOLD_TO_CBET: {alpha: 40, beta: 60}
+    BLUFF_AT_SHOWDOWN: {alpha: 10, beta: 90}
+    af_target_mean: 0.9
+boundaries:
+  tight_vpip_max: 0.3
+  loose_vpip_min: 0.45
+  passive_af_max: 1.5
+  aggressive_af_min: 2.0
+  soft_assignment: {method: gmm_proba, min_hands_for_typing: 20, shrink_to_population_if_fewer: true}
+hu_population_raw: {VPIP_mean: 0.78, PFR_mean: 0.53, AF_mean: 2.43, VPIP_SB_mean: 0.87,
+  VPIP_BB_mean: 0.67, note: HU 포지션 수학의 귀결. 4-9way 에서는 EP VPIP ≪ BTN VPIP 의 비대칭이 다시
+    등장.}
+bootstrap_observed:
+  callstation: {vpip_rate: 0.6296, pfr_rate: 0.0, af_smoothed: 0.0, opps: 2500, aggressive: 0,
+    passive: 3622}
+  nitrock: {vpip_rate: 0.0524, pfr_rate: 0.0508, af_smoothed: 10.0, opps: 2500, aggressive: 291,
+    passive: 25}
+  tag: {vpip_rate: 0.1284, pfr_rate: 0.1252, af_smoothed: 10.0, opps: 2500, aggressive: 473,
+    passive: 30}
+  lag: {vpip_rate: 0.2568, pfr_rate: 0.2536, af_smoothed: 10.0, opps: 2500, aggressive: 1524,
+    passive: 85}

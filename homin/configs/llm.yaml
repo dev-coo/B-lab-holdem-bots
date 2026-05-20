@@ -1,0 +1,85 @@
+# LLM Coordinator 설정.
+# 근거: research/parameters/llm_coordinator_rationale.md v0.2 (프록시 전환).
+# 엔드포인트: OpenAI-호환 로컬 프록시 (http://localhost:8317/v1).
+# 클라이언트: openai>=1.50 (AsyncOpenAI with base_url override).
+
+version: 0.2
+stage: draft
+source: "OpenAI-compat proxy (sk-cliproxy-*). Section M 개정."
+
+# 엔드포인트 (env 로 덮어쓰기 가능)
+endpoint:
+  base_url:      "http://localhost:8317/v1"
+  env_var_key:   "HOLDEM_LLM_API_KEY"      # .env 에서 로드
+  env_var_base_url: "HOLDEM_LLM_BASE_URL"  # 선택적 override
+
+# 모델 티어 (비용 오름차순: sonnet < opus).
+# 실제 모델 ID 는 프록시 `/v1/models` 응답 기준 (2026-04-19).
+# 주의: claude-3-5-haiku-* 와 claude-3-7-sonnet-* 는 프록시에서 404 (미지원).
+#       따라서 default 를 sonnet 으로 고정. haiku tier 부재.
+models:
+  default:  "claude-sonnet-4-5-20250929"     # 빠르고 저렴 — 대부분 escalation
+  standard: "claude-sonnet-4-5-20250929"     # borderline 재확인 (동일 모델 — 별도 hop 불필요)
+  critical: "claude-opus-4-6"                # 결승/버블/대형 인포셋 — 최신 opus
+
+# 모델별 파라미터
+model_params:
+  claude-sonnet-4-5-20250929:
+    max_tokens:  1024
+    timeout_s:   2.0
+    temperature: 0.0
+  claude-opus-4-6:
+    max_tokens:  2048
+    timeout_s:   3.0
+    temperature: 0.0
+
+# Escalation gate (언제, 어느 모델로 escalate 할 것인가)
+escalation_gate:
+  # default_triggers 만 통과하면 haiku.
+  default_triggers:
+    - "top1_top2_ev_within_5pct"
+    - "variance_high"
+  # standard_triggers 통과 시 sonnet (haiku 결과 재확인 가치가 있는 borderline).
+  standard_triggers:
+    - "multiway_3plus_borderline"
+    - "fold_equity_uncertain"
+  # critical_triggers 통과 시 opus.
+  critical_triggers:
+    - "M_lt_6"
+    - "near_bubble"
+    - "stack_gt_100bb_pot_gt_50bb"
+
+# 호출 빈도 예산
+budget:
+  per_hand_max_calls:  1
+  per_game_max_calls:  20
+  per_day_max_calls:   5000
+  per_minute_max_calls: 10
+
+# Fallback — 모든 실패 경로에서 통계 argmax 로 수렴 (P6 원칙)
+fallback:
+  on_timeout:           "statistical_argmax"
+  on_api_error:         "statistical_argmax"   # 5xx, rate limit, overload, proxy 다운
+  on_auth_missing:      "statistical_argmax"   # HOLDEM_LLM_API_KEY 결손
+  on_budget_exceeded:   "statistical_argmax"
+  on_schema_violation:  "statistical_argmax"   # LLM 응답이 허용 액션 집합 밖
+
+# Snapshot 재현성 (temperature=0.0 전제)
+snapshot_test:
+  enabled:  true
+  path:     "tests/snapshots/llm_decisions.jsonl"
+
+# 감사 로그
+audit:
+  log_file: "data/logs/llm_calls.jsonl"
+  # 각 호출 1줄: ts, model, prompt_hash, response_action, latency_s, tokens_in, tokens_out,
+  #             cost_est_usd, game_id, hand_id
+
+# 비용 추정 (per 1M tokens, 2026-04 기준 추정 — 프록시가 실제 과금)
+cost_estimate_usd:
+  claude-sonnet-4-5-20250929:
+    input:   3.00
+    output: 15.00
+  claude-opus-4-6:
+    input:  15.00
+    output: 75.00

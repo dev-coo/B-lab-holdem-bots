@@ -1,0 +1,47 @@
+# 서버 블라인드 구조 (BOT_GUIDE §8)
+#
+# Source: research/bot_guide_extracts.md §10.2
+# Derived: research/blind_schedule_analysis.md (Lv별 M 계산)
+#
+# 주의: "hands" 는 해당 레벨이 지속되는 핸드 수 (추정 해석).
+# 시작 스택: 300
+
+starting_stack: 300
+
+min_players: 4
+max_players: 9
+
+levels:
+  - {level: 1,  sb: 1,    bb: 2,    hands: 10}
+  - {level: 2,  sb: 2,    bb: 4,    hands: 10}
+  - {level: 3,  sb: 3,    bb: 6,    hands: 10}
+  - {level: 4,  sb: 4,    bb: 8,    hands: 10}
+  - {level: 5,  sb: 5,    bb: 10,   hands: 10}
+  - {level: 6,  sb: 10,   bb: 20,   hands: 8}
+  - {level: 7,  sb: 20,   bb: 40,   hands: 8}
+  - {level: 8,  sb: 30,   bb: 60,   hands: 8}
+  - {level: 9,  sb: 40,   bb: 80,   hands: 8}
+  - {level: 10, sb: 50,   bb: 100,  hands: 8}
+  - {level: 11, sb: 100,  bb: 200,  hands: 6}
+  - {level: 12, sb: 200,  bb: 400,  hands: 6}
+  - {level: 13, sb: 300,  bb: 600,  hands: 6}
+  - {level: 14, sb: 400,  bb: 800,  hands: 6}
+  - {level: 15, sb: 500,  bb: 1000, hands: 6}
+  - {level: 16, sb: 750,  bb: 1500, hands: 6}
+  - {level: 17, sb: 1000, bb: 2000, hands: 6}
+  - {level: 18, sb: 1500, bb: 3000, hands: 4}
+  - {level: 19, sb: 2000, bb: 4000, hands: 4}
+  - {level: 20, sb: 3000, bb: 6000, hands: null}  # null = infinite
+
+# 모드 전환 경계 (M 기준)
+# Reference: bot_guide_extracts.md Note 13.1
+mode_thresholds:
+  deep:      {min_M: 30}
+  mid:       {min_M: 15, max_M: 30}
+  hybrid:    {min_M: 8,  max_M: 15}
+  push_fold: {max_M: 8}
+
+# 누적 핸드 범위 (Lv 20 제외)
+cumulative_hands:
+  total_to_lv19: 140
+  avg_game_length_estimate: [80, 130]  # bot_guide_extracts.md Note 10.3

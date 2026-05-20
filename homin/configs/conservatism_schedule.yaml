@@ -1,0 +1,83 @@
+# Conservatism 스케줄 — n_effective 에 따라 mode/sizing/bluff/lambda/opening 이 연속 변화.
+# 근거: research/dataset_analysis/eda_03_convergence.md §6 (HU 2.06M 수렴 곡선).
+# BOT_GUIDE §1.1 영속 통계, §5.3/5.4 이벤트 기반 counter.
+
+version: 0.1
+stage: draft
+source: "eda_03_convergence.md v0.1 (15 LLM 수렴 곡선 knee)"
+
+# n_effective = n_personal + 0.3 × n_class + 0.05 × n_population
+# VPIP 오차 곡선의 knee 위치에서 경계 설정
+schedule:
+  - {n_max:  10,  mode: hard_conservative, vpip_error_pct: 13.0}
+  - {n_max:  30,  mode: conservative,      vpip_error_pct:  5.0}
+  - {n_max:  80,  mode: transitional,      vpip_error_pct:  4.5}
+  - {n_max: 150,  mode: near_balanced,     vpip_error_pct:  3.5}
+  - {n_max: 400,  mode: balanced,          vpip_error_pct:  2.0}
+  - {n_max: null, mode: exploit_ready,     vpip_error_pct:  1.5}
+
+# 각 mode 별 하위 모듈 파라미터 주입
+mode_params:
+  hard_conservative:
+    sizing_grid:     conservative
+    bluff_factor:    0.50
+    lambda_mult:     3.0
+    opening_mult:    0.75
+    allow_allin:     false
+  conservative:
+    sizing_grid:     conservative
+    bluff_factor:    0.65
+    lambda_mult:     2.2
+    opening_mult:    0.85
+    allow_allin:     false
+  transitional:
+    sizing_grid:     balanced
+    bluff_factor:    0.80
+    lambda_mult:     1.6
+    opening_mult:    0.92
+    allow_allin:     true
+  near_balanced:
+    sizing_grid:     balanced
+    bluff_factor:    0.92
+    lambda_mult:     1.2
+    opening_mult:    0.98
+    allow_allin:     true
+  balanced:
+    sizing_grid:     balanced
+    bluff_factor:    1.00
+    lambda_mult:     1.0
+    opening_mult:    1.00
+    allow_allin:     true
+  exploit_ready:
+    sizing_grid:     exploit
+    bluff_factor:    personal_AF_based    # AF 에 비례한 자율 조정
+    lambda_mult:     1.0
+    opening_mult:    personal_optimum
+    allow_allin:     true
+
+# decay (metagame drift 대응)
+decay:
+  # weight(age_in_hands) = max(min_weight, exp(-age / tau))
+  tau_decay_hands:    2000
+  min_weight:         0.2
+
+# shrinkage weights (§H.1 재확인)
+shrinkage:
+  tau_class:      8       # 8 핸드 이후 class_prior 와 개인 posterior 가 동일 가중
+  tau_population: 40      # 40 핸드 이후 population 도 같이 수렴
+
+# 자기-이미지 교정 (§I.10.b)
+self_image_check:
+  # 최근 20 핸드 내 내 VPIP 가 population 의 50% 미만이면 mode 한 단계 상승
+  window_hands:      20
+  vpip_floor_ratio:  0.5
+  pfr_floor_ratio:   0.4
+
+# 검증 타겟
+validation:
+  # 자기대전 10k 에서 보수성 on/off 비교:
+  #  - ITM rate (토너먼트): on 이 off 대비 ≥ +5%p
+  #  - variance (BB/100 std): on 이 off 대비 ≤ 60%
+  self_play_goals:
+    itm_rate_advantage: 0.05
+    variance_reduction: 0.40

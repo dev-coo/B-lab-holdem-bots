@@ -1,0 +1,67 @@
+{
+  "mode": "multi",
+  "schedule": {
+    "starting_stack": 300,
+    "n_levels": 20
+  },
+  "config": {
+    "mode": "multi",
+    "per_pair": 10,
+    "tourns": 30,
+    "max_hands": 500,
+    "seed": 0,
+    "output": "data/tournament_multi_results.json"
+  },
+  "totals": [
+    {
+      "name": "lag",
+      "wins": 10,
+      "itm": 14,
+      "itm_pct": 46.666666666666664,
+      "avg_rank": 1.8,
+      "avg_pts": 3.2
+    },
+    {
+      "name": "nitrock",
+      "wins": 4,
+      "itm": 10,
+      "itm_pct": 33.33333333333333,
+      "avg_rank": 1.9,
+      "avg_pts": 3.1
+    },
+    {
+      "name": "tag",
+      "wins": 2,
+      "itm": 12,
+      "itm_pct": 40.0,
+      "avg_rank": 1.9333333333333333,
+      "avg_pts": 3.066666666666667
+    },
+    {
+      "name": "nashjam",
+      "wins": 5,
+      "itm": 14,
+      "itm_pct": 46.666666666666664,
+      "avg_rank": 2.3,
+      "avg_pts": 2.7
+    },
+    {
+      "name": "random",
+      "wins": 7,
+      "itm": 7,
+      "itm_pct": 23.333333333333332,
+      "avg_rank": 2.8666666666666667,
+      "avg_pts": 2.1333333333333333
+    },
+    {
+      "name": "callstation",
+      "wins": 2,
+      "itm": 3,
+      "itm_pct": 10.0,
+      "avg_rank": 4.2,
+      "avg_pts": 0.8
+    }
+  ],
+  "avg_hands": 95.46666666666667,
+  "avg_final_level": 11.533333333333333
+}

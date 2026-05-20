@@ -1,0 +1,70 @@
+# 인원수별 포지션 → 4-class 축약 매핑
+#
+# Source: research/bot_guide_extracts.md §6
+# Classes: EP (Early), MP (Middle), LP (Late), BLIND (sb/bb)
+#
+# 주의:
+#   - HU (2인) 는 btn 이 곧 SB 역할 (HU 규칙).
+#   - 인원이 적을수록 EP/MP 는 압축되거나 부재.
+#   - preflop/postflop 액션 순서는 BOT_GUIDE §4 참조.
+
+positions_by_player_count:
+  2:
+    btn: LP      # HU 에서 btn = SB 위치
+    bb:  BLIND
+  3:
+    btn: LP
+    sb:  BLIND
+    bb:  BLIND
+  4:
+    btn: LP
+    sb:  BLIND
+    bb:  BLIND
+    utg: MP    # 4-max UTG 는 9-max EP 만큼 좁지 않음 — MP 분류
+  5:
+    btn: LP
+    sb:  BLIND
+    bb:  BLIND
+    utg: EP    # 5-max UTG (chart 5-max 버전이 자체적으로 wider)
+    co:  MP    # 5-max CO 는 BTN 보다 좁음 → LP 가 아닌 MP 로 분리
+  6:
+    btn: LP
+    sb:  BLIND
+    bb:  BLIND
+    utg: EP
+    hj:  MP
+    co:  MP    # was LP — 5인 분기와 일관, 6-max GTO (CO RFI ~30%) 와 일치
+  7:
+    btn: LP
+    sb:  BLIND
+    bb:  BLIND
+    utg: EP
+    mp:  MP
+    hj:  MP
+    co:  LP
+  8:
+    btn: LP
+    sb:  BLIND
+    bb:  BLIND
+    utg: EP
+    utg1: EP
+    mp:  MP
+    hj:  MP
+    co:  LP
+  9:
+    btn: LP
+    sb:  BLIND
+    bb:  BLIND
+    utg: EP
+    utg1: EP
+    mp:  MP
+    mp1: MP
+    hj:  MP
+    co:  LP
+
+# 액션 순서 (참조용)
+action_order:
+  preflop_non_hu: [utg, utg1, mp, mp1, hj, co, btn, sb, bb]
+  postflop_non_hu: [sb, bb, utg, utg1, mp, mp1, hj, co, btn]
+  preflop_hu:  [btn, bb]
+  postflop_hu: [bb, btn]
