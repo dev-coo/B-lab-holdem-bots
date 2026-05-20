@@ -1,0 +1,107 @@
+{
+  "wooz": {
+    "name": "ExploitativeLAG",
+    "preflop": {
+      "btn_open_tier": 7,
+      "btn_open_tier8_prob": 0.3,
+      "bb_call_tier5_max_bb": 4,
+      "bb_call_tier7_max_bb": 3,
+      "bb_call_tier7_prob": 0.6,
+      "bb_3bet_tier2_prob": 0.55,
+      "push_fold_bb": 11,
+      "push_tier": 6,
+      "push_tier7_prob": 0.3
+    },
+    "postflop": {
+      "monster_threshold": 0.7,
+      "good_threshold": 0.55,
+      "medium_threshold": 0.28,
+      "cbet_prob": 0.6,
+      "bluff_prob": 0.22,
+      "float_prob": 0.15,
+      "trap_check_prob": 0.5
+    }
+  },
+  "scalping": {
+    "strategy": {
+      "entry": {
+        "min_signals": 3,
+        "rsi_upper": 70,
+        "rsi_lower": 30
+      },
+      "exit": {
+        "target_pct": 1.0,
+        "partial_pct": 0.5,
+        "trailing_drop": 0.3
+      },
+      "avg": {
+        "threshold_pct": -0.5,
+        "max_count": 2
+      },
+      "risk": {
+        "invest_ratio": 0.1,
+        "max_daily_trades": 5
+      }
+    }
+  },
+  "hugo": {
+    "name": "AdaptiveTAG",
+    "preflop": {
+      "btn_open_tier": 6,
+      "btn_tier7_steal_prob": 0.35,
+      "bb_defend_tier6_max_bb": 4,
+      "bb_defend_tier7_prob": 0.45,
+      "bb_3bet_vs_loose_prob": 0.6,
+      "push_fold_bb": 10,
+      "push_tier": 5,
+      "push_tier6_prob": 0.4
+    },
+    "postflop": {
+      "monster_threshold": 0.7,
+      "good_threshold": 0.45,
+      "medium_threshold": 0.25,
+      "cbet_prob": 0.55,
+      "bluff_prob": 0.22,
+      "float_prob": 0.2,
+      "check_raise_trap_prob": 0.4,
+      "bluff_catch_prob": 0.15
+    }
+  },
+  "macuil": {
+    "name": "EV-Max (Macuilxochitl, 아즈텍 도박의 신)",
+    "push_fold_bb": 10,
+    "allin_spr_max": 3.0,
+    "allin_shortstack_bb": 15,
+    "allin_equity_bias": 0.90,
+    "preflop_raise_bb_multipliers": [2, 3, 4, 6],
+    "postflop_raise_ratios": [0.33, 0.5, 0.66, 1.0]
+  },
+  "eshu": {
+    "name": "Maniac (Eshu, 요루바 트릭스터)",
+    "preflop": {
+      "push_fold_bb": 12,
+      "short_push_tier": 6,
+      "ultra_short_push_tier": 7,
+      "raise_tier": 6,
+      "vpip_tier": 7,
+      "open_raise_bb": 4,
+      "threebet_multiplier": 3,
+      "tier8_bluff_prob": 0.20,
+      "tier8_bluff_bb": 3,
+      "limp_max_bb": 4
+    },
+    "postflop": {
+      "equity_sims": 200,
+      "strong_threshold": 0.70,
+      "medium_threshold": 0.50,
+      "float_equity_min": 0.30,
+      "float_prob": 0.40,
+      "bluff_freq": 0.70,
+      "bluff_raise_prob": 0.25,
+      "value_bet_pct": 0.80,
+      "medium_bet_pct": 0.60,
+      "bluff_bet_pct": 0.75,
+      "overbet_ratio": 2.0
+    }
+  }
+}

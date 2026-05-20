@@ -1,0 +1,13 @@
+{
+  "_comment": "60분 수정창에서 만지는 핵심 튜닝 키. 한 번에 한 키만 수정 권장.",
+
+  "pushfold_tightness": 1.0,
+  "icm_pressure_threshold": 0.6,
+  "icm_fold_bonus": 0.05,
+  "chipleader_aggro_mult": 1.4,
+  "fold_equity_margin": 0.0,
+
+  "fallback_to_legacy_on_error": true,
+  "exploit_enabled": true,
+  "min_hands_for_classification": 30
+}
