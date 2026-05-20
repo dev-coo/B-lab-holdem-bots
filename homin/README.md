@@ -30,7 +30,7 @@ Texas Hold'em No-Limit 토너먼트 봇 — 3-계층 Bayesian 상대 모델 + Co
 
 **문제**: 모든 봇이 동시에 시작 → 누구에게도 사전 데이터가 없음 → 초반에 좋은 성능을 내기 어려움. 게다가 참여 봇이 6개이기 때문에 한 봇이 경향을 바꾸면 **환경 자체가 흔들릴** 가능성도 있음. cold start 가 풀려야 점진 적응도 의미가 있음.
 
-**해결**: Kaggle 의 `poker-heads-up` 데이터셋 (15 LLM 모델 페어, **2,059,400 핸드**) 을 population prior 로 사전 주입.
+**해결**: Kaggle 의 [`kaggle/poker-heads-up`](https://www.kaggle.com/datasets/kaggle/poker-heads-up) 데이터셋 (15 LLM 모델 페어, **2,059,400 핸드**, CC BY 4.0) 을 population prior 로 사전 주입. 데이터셋 자체는 용량(~1.8 GB) 때문에 repo 에 없음 — 아래 [데이터 재현](#데이터-재현-kaggle-데이터셋) 섹션 참조.
 
 구현 경로:
 - `data/kaggle/` — 원본 데이터
@@ -134,6 +134,29 @@ uv run pytest tests/test_ev.py -v
 
 # 타입 체크는 pyright/mypy 미연동, ruff 사용
 uv run ruff check src tests
+```
+
+## 데이터 재현 (Kaggle 데이터셋)
+
+`research/dataset_analysis/eda_01~05` 와 `configs/priors.yaml` 의 population prior 는 Kaggle 의 LLM vs LLM 1:1 핸드 히스토리 데이터셋에서 산출되었다. **저장소 용량 제약 (압축 해제 시 ~1.8 GB) 으로 원본 데이터는 push 에 포함되지 않음** — EDA 를 직접 재현하려면 아래 절차로 받을 것. (봇 실서버 구동에는 데이터 불필요 — `configs/priors.yaml` 만 있으면 됨.)
+
+- **Kaggle 데이터셋**: <https://www.kaggle.com/datasets/kaggle/poker-heads-up>
+- **라이선스**: CC BY 4.0
+- **크기**: 101 MB (zip) → ~1.8 GB (압축 해제), 105 matchup 파일, **2,059,400 핸드**
+- **SHA256 (zip)**: `2708a34b43cddb72dacefe877feeb2b9c7ad51121ba25f9873cea2b8cd6b9599`
+- **상세 provenance**: `research/LICENSE_NOTE.md`
+
+```bash
+# Kaggle API 설치 + 인증 (~/.kaggle/kaggle.json 필요)
+pip install kaggle
+
+# 데이터셋 받기 (PokerStars-style hand history *.txt 105개)
+mkdir -p data/raw
+kaggle datasets download -d kaggle/poker-heads-up -p data/raw --unzip
+
+# 파싱·검증 (≈92초, 2M 핸드)
+uv run python scripts/dataset_inspect.py
+# → data/dataset_report.json 생성, eda_01~05 의 입력
 ```
 
 ## 문서
