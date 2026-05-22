@@ -39,7 +39,7 @@ B-lab-holdem-bots/
 |--------|------|----------|
 | eunwoo | [`eunwoo/`](./eunwoo/) | TBD (Phase 2에서 채움) |
 | homin | [`homin/`](./homin/) | Bayesian 상대모델 + Kelly 유사 log-utility + Kaggle LLM 1:1 데이터로 cold-start 해결 |
-| TBD | — | — |
+| mineru | [`mineru/`](./mineru/) | 전략 레지스트리 + 실전/벤치마크 반복 평가 기반 stage-safe-field-counter 후보 |
 | TBD | — | — |
 | TBD | — | — |
 | TBD | — | — |
