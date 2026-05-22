@@ -1,0 +1,29 @@
+```
+# bot_id : 60
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "쫄보감별계산기" --strategy stage-safe-field-counter --verbose --hud
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy learning-field-exploit --verbose --hud
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy robust-field-exploit --verbose --hud
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy bayesian-exploit --verbose --hud // https://arxiv.org/abs/1207.1411
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy omni --verbose --hud
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy hybrid-gto --verbose --hud
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy gto-baseline --verbose --hud
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy anti-maniac-trapper --verbose --hud
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "너구리쿤" --strategy dominance-wet-board-protector --verbose --hud
+```
+
+이건 에이전트 실행 후 게임에 참가 시키는 스크립트 샘플 코드 입니다.
+```
+curl 'http://59.28.196.50:5051/bots/{bot_id}/deploy' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json' \
+  -b 'holdem_session=<HOLDEM_SESSION_COOKIE>' \
+  -H 'Origin: http://59.28.196.50:5051' \
+  -H 'Referer: http://59.28.196.50:5051/dashboard' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  --data-raw '{"game_count":100}' \
+  --insecure
+```
+
+이거 실행 테스트 해줘. 안되네

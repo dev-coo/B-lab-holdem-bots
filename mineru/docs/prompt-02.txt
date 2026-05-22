@@ -1,0 +1,37 @@
+```
+# bot_id : 36
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "히드라" --strategy {strategy_name} --verbose
+# bot_id : 52
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "거드라" --strategy {strategy_name} --verbose
+# bot_id : 53
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "취두부" --strategy {strategy_name} --verbose
+# bot_id : 54
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "침튜브" --strategy {strategy_name} --verbose
+# bot_id : 55
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "냥냥스" --strategy {strategy_name} --verbose
+# bot_id : 56
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "잠만보" --strategy {strategy_name} --verbose
+# bot_id : 57
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "저글링" --strategy {strategy_name} --verbose
+# bot_id : 60
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "네루" --strategy dominance-wet-board-protector --verbose
+```
+
+이건 에이전트 실행 후 게임에 참가 시키는 스크립트 샘플 코드 입니다.
+```
+curl 'http://59.28.196.50:5051/bots/{bot_id}/deploy' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json' \
+  -b 'holdem_session=<HOLDEM_SESSION_COOKIE>' \
+  -H 'Origin: http://59.28.196.50:5051' \
+  -H 'Referer: http://59.28.196.50:5051/dashboard' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  --data-raw '{"game_count":100}' \
+  --insecure
+```
+
+
+실행하고 각 bot_id를 실행해서 실제 게임 진행을 해서 누가 가장 우수한지 평가해보자.
+그런데 게임을 최소한 500판은 진행하고 종료하세요.

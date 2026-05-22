@@ -1,0 +1,5 @@
+/oh-my-claudecode:deep-interview /oh-my-claudecode:autoresearch
+
+기존 전략들을 모두 이길 수 있는 새로운 전략을 10개를 만들고자 합니다.
+하나씩 새로운 전략을 만들고 게임을 충분히 진행해서 압도적인 승리를 하는 전략을 선정을 해야 합니다.
+@docs/prompt-02.txt 에 있는 내용을 참고해서 계속 실전에서도 유용하게 동작하는 전략을 만들어내도록 하세요.

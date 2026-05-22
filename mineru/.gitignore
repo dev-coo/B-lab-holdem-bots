@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+*.egg
+dist/
+build/
+eggs/
+
+# Virtual environments
+.venv/
+venv/
+
+# Local secrets
+.env
+
+# Type checkers
+.mypy_cache/
+.pytype/
+
+# Linters
+.ruff_cache/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Database (runtime)
+db/*.db
+
+# OS
+.DS_Store
+Thumbs.db
+
+# OMC state
+.omc
+.omx
