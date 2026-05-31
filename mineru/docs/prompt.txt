@@ -1,0 +1,36 @@
+```
+# bot_id : 36
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "히드라" --strategy calling-station --verbose
+# bot_id : 52
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "거드라" --strategy tight-aggressive --verbose
+# bot_id : 53
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "취두부" --strategy gto-baseline --verbose
+# bot_id : 54
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "침튜브" --strategy aggressive --verbose
+# bot_id : 55
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "냥냥스" --strategy adaptive --verbose
+# bot_id : 56
+uv run holdem-agent play ws://59.28.196.50:5051/ws "<BOT_API_TOKEN>" "잠만보" --strategy hybrid-gt --verbose
+```
+
+이 다섯 가지 전략 중에서 어떤 전략이 가장 우수한지 평가해줘.
+
+이건 에이전트 실행 후 테스트를 실행하는 스크립트 샘플 코드 입니다.
+
+```
+curl 'http://59.28.196.50:5051/bots/{bot_id}/test' \
+  -H 'Accept: */*' \
+  -H 'Accept-Language: ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7' \
+  -H 'Connection: keep-alive' \
+  -H 'Content-Type: application/json' \
+  -b 'holdem_session=<HOLDEM_SESSION_COOKIE>' \
+  -H 'Origin: http://59.28.196.50:5051' \
+  -H 'Referer: http://59.28.196.50:5051/dashboard' \
+  -H 'User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36' \
+  --data-raw '{"game_count":1}' \
+  --insecure
+```
+
+실행하고 각 bot_id를 대치시켜서 테스트를 자동으로 진행하세요.
+
+이들은 각각 서브 에이전트 형식으로 실행을 하고 로그들을 감시 분석을 하고 도중에 계속 레포트를 작성하세요.
