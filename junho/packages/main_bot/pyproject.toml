@@ -1,0 +1,18 @@
+[project]
+name = "holdem-main-bot"
+version = "0.3.0"
+description = "메인 운영 봇 — v3 BalancedStrategy (position/M-ratio/preflop 레인지/multiway/드로우/상대 프로필). 검증된 실전 주력."
+requires-python = ">=3.12"
+dependencies = [
+    "holdem-core",
+]
+
+[tool.uv.sources]
+holdem-core = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/holdem_main_bot"]

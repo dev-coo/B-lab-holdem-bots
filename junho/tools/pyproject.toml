@@ -1,0 +1,19 @@
+[project]
+name = "holdem-tools"
+version = "0.2.0"
+description = "Holdem 공용 도구 — 세션 분석 CLI, Streamlit 대시보드, 리플레이/튜닝 스크립트"
+requires-python = ">=3.12"
+dependencies = [
+    "holdem-core",
+    "streamlit>=1.38",
+]
+
+[tool.uv.sources]
+holdem-core = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/holdem_tools"]

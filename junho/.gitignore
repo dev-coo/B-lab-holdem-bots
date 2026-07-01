@@ -1,0 +1,16 @@
+# 파이썬
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# 봇별 설정(토큰 포함) — .env.example 만 커밋
+.env
+packages/*/.env
+
+# 관측 산출물
+.debug/
+logs/*.out
+logs/*.jsonl
+*.db

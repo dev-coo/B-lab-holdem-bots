@@ -39,7 +39,7 @@ B-lab-holdem-bots/
 |--------|------|----------|
 | eunwoo | [`eunwoo/`](./eunwoo/) | TBD (Phase 2에서 채움) |
 | homin | [`homin/`](./homin/) | Bayesian 상대모델 + Kelly 유사 log-utility + Kaggle LLM 1:1 데이터로 cold-start 해결 |
-| TBD | — | — |
+| junho | [`junho/`](./junho/) | 룰베이스 핸드강도 → 몬테카를로 equity → 베이지안 뻥카 감지("쫄보감별계산기"); 한 봇(BalancedStrategy)을 v0→v5.5로 진화 |
 | TBD | — | — |
 | TBD | — | — |
 | TBD | — | — |

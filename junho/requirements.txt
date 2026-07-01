@@ -1,0 +1,13 @@
+# junho 홀덤 봇 — 실제 사용된 파이썬 의존성 (전부 순수 파이썬, numpy/treys 없음)
+# 출처: packages/core/pyproject.toml + tools/pyproject.toml
+#
+# 봇 본체(main_bot)만 돌리는 데 필요한 것: fastapi, uvicorn, pydantic-settings, websockets
+# 대시보드(tools/viz)까지 쓰려면: streamlit
+
+fastapi>=0.115
+uvicorn[standard]>=0.32
+pydantic-settings>=2.6      # pydantic 2.x 를 함께 끌어옴
+websockets>=13
+
+# 관측용 Streamlit 대시보드 (선택 — VIZ_ENABLED=true 로 켤 때만 필요)
+streamlit>=1.38
